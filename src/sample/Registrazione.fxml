@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="center" hgap="10" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="902.0" prefWidth="1920.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="880.0" minHeight="880.0" prefHeight="880.0" />
+    </rowConstraints>
+    <children>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="898.0" prefWidth="1550.0" style="-fx-background-color: #00C1FF;" GridPane.rowIndex="1">
+         <children>
+             <ImageView id="userText" fitHeight="805.0" fitWidth="1038.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                 <image>
+                     <Image url="@SignIn.png" />
+                 </image></ImageView>
+            <ScrollPane layoutX="752.0" layoutY="76.0" prefHeight="646.0" prefWidth="656.0" style="-fx-background-color: #ccddef;">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1079.0" prefWidth="639.0" style="-fx-background-color: #ccddef;">
+                     <children>
+                        <Label layoutX="23.0" layoutY="34.0" text="Inserisci un nome utente*:" />
+                        <TextField id="userText" fx:id="userText" layoutX="233.0" layoutY="30.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="23.0" layoutY="65.0" text="Inserisci la password*:" />
+                        <PasswordField id="passText" fx:id="passText" layoutX="232.0" layoutY="61.0" prefHeight="26.0" prefWidth="206.0" />
+                        <Label layoutX="23.0" layoutY="96.0" text="Ripeti la password*:" />
+                        <PasswordField id="pass2Text" fx:id="pass2Text" layoutX="232.0" layoutY="92.0" prefHeight="26.0" prefWidth="206.0" />
+                        <Label layoutX="23.0" layoutY="137.0" text="Inserisci la data di nascita*:" />
+                        <DatePicker id="dataNText" layoutX="232.0" layoutY="133.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="23.0" layoutY="204.0" text="Inserisci il codice fiscale*:" />
+                        <TextField id="CFText" layoutX="231.0" layoutY="200.0" prefHeight="26.0" prefWidth="205.0" />
+                        <ChoiceBox fx:id="luogoNText" layoutX="233.0" layoutY="167.0" onMouseClicked="#handleSignUpClick" prefHeight="26.0" prefWidth="205.0">
+                        </ChoiceBox>
+                        <Label layoutX="23.0" layoutY="171.0" text="Inserisci il luogo di nascita*:" />
+                        <Button layoutX="438.0" layoutY="200.0" mnemonicParsing="false" text="CF" />
+                        <Separator layoutX="-1.0" layoutY="112.0" prefHeight="26.0" prefWidth="507.0" />
+                        <Separator layoutX="-1.0" layoutY="222.0" prefHeight="26.0" prefWidth="507.0" />
+                        <Label layoutX="23.0" layoutY="252.0" text="Inserisci il tuo nome*:" />
+                        <TextField id="nomeText" layoutX="233.0" layoutY="248.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="23.0" layoutY="285.0" text="Inserisci il tuo cognome*:" />
+                        <TextField id="cognomeText" layoutX="233.0" layoutY="281.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="23.0" layoutY="318.0" text="Inserisci la tua email*:" />
+                        <TextField id="emailText" layoutX="233.0" layoutY="314.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="23.0" layoutY="352.0" text="Inserisci il numero di telefono:" />
+                        <TextField id="telText" layoutX="233.0" layoutY="348.0" prefHeight="26.0" prefWidth="205.0" />
+                        <ChoiceBox id="sessoText" layoutX="234.0" layoutY="384.0" prefHeight="26.0" prefWidth="206.0" value=" ">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value=" " />
+                                        <String fx:value="F" />
+                                        <String fx:value="M" />
+                                    </FXCollections>
+                                </items>
+                        </ChoiceBox>
+                         <Label layoutX="22.0" layoutY="385.0" text="Inserisci il sesso*:" />
+                        <Separator layoutX="8.0" layoutY="410.0" prefHeight="26.0" prefWidth="507.0" />
+                        <Label id="hobbyText" layoutX="23.0" layoutY="440.0" text="Inserisci i tuoi hobby:" />
+                        <Label id="allergeniText" layoutX="20.0" layoutY="593.0" text="Inserisci eventuali allergeni:" />
+                        <TextArea id="hobbyText" layoutX="235.0" layoutY="436.0" prefHeight="142.0" prefWidth="200.0" />
+                        <TextArea id="allergeniText" layoutX="235.0" layoutY="593.0" prefHeight="142.0" prefWidth="200.0" />
+                        <Label id="allergeniText" layoutX="24.0" layoutY="750.0" text="Inserisci eventuali precauzioni:" />
+                        <TextArea id="precauzioniText" layoutX="236.0" layoutY="750.0" prefHeight="142.0" prefWidth="200.0" />
+                        <Separator layoutX="-1.0" layoutY="892.0" prefHeight="26.0" prefWidth="507.0" />
+                        <Label layoutX="22.0" layoutY="928.0" text="Inserisci il nome di un genitore*:" />
+                        <TextField id="nomeGenText" layoutX="232.0" layoutY="924.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="22.0" layoutY="961.0" prefHeight="18.0" prefWidth="197.0" text="Inserisci il cognome di un genitore*:" />
+                        <TextField id="cognomeGenText" layoutX="232.0" layoutY="957.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="22.0" layoutY="994.0" text="Inserisci la sua email*:" />
+                        <TextField id="emailGenText" layoutX="232.0" layoutY="990.0" prefHeight="26.0" prefWidth="205.0" />
+                        <Label layoutX="22.0" layoutY="1028.0" text="Inserisci il numero di telefono:" />
+                        <TextField id="telGenText" layoutX="232.0" layoutY="1024.0" prefHeight="26.0" prefWidth="205.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <Button id="esci" fx:id="Exit" layoutX="1363.0" layoutY="17.0" onAction="#handleExitClick" prefHeight="18.0" prefWidth="35.0" text="Exit" />
+            <Button id="Avanti" fx:id="Avanti" layoutX="1320.0" layoutY="748.0" onAction="#handleRegistrationClick" prefHeight="48.0" prefWidth="93.0" text="Avanti" />
+         </children></AnchorPane>
+    </children>
+</GridPane>

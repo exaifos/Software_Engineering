@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="745.0" prefWidth="891.0" style="-fx-background-color: #00C1FF;">
+         <children>
+            <ImageView id="userText" fitHeight="581.0" fitWidth="885.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Progetto%20senza%20titolo.png" />
+               </image></ImageView>
+            <Label layoutX="334.0" layoutY="248.0" prefHeight="46.0" prefWidth="199.0" text="Benvenuto" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="userText" layoutX="278.0" layoutY="344.0" onAction="#handleLoginClick" prefHeight="30.0" prefWidth="311.0" promptText="Username" />
+            <PasswordField fx:id="passText" layoutX="278.0" layoutY="420.0" onAction="#handleLoginClick" prefHeight="30.0" prefWidth="311.0" promptText="Password" />
+            <Button fx:id="Login" layoutX="460.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleLoginClick" prefHeight="32.0" prefWidth="73.0" text="Login">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="SignIn" layoutX="334.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#handleSignIpClick" text="Sign In">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="Exit" layoutX="856.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#handleExitClick" prefHeight="25.0" prefWidth="21.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
