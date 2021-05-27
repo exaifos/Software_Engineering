@@ -34,7 +34,11 @@ public class Controller {
     public String order;
     public String dataN;
     public String luogoN;
-
+    public Button Nuovo;
+    @FXML
+    public Button Login;
+    @FXML
+    public Button Start;
     @FXML
     public DatePicker dataNText;
     @FXML
@@ -201,6 +205,7 @@ public class Controller {
         String catasto;
         String queryCat = "SELECT DISTINCT catasto FROM codice_catasto WHERE comune ILIKE  '" + luogoN + "';";
         ResultSet catast = databaseOperation.SQL_return(queryCat);
+        catast.next();
         catasto=catast.getString(1);
         cf = calcoloCodiceFiscale.CF_automatico(nome,cognome,catasto,dataN,sesso);
         CFText.setText(cf);
@@ -214,12 +219,19 @@ public class Controller {
         databaseOperation.SQL_insert(query3);
     }
 
-    public void handleSignIpClick(ActionEvent mouseEvent) {
-        System.out.println("CIAOOOOOOOOOO");
+    public void handleSignIpClick(MouseEvent mouseEvent) {
         try {
             Stage stage = (Stage) SignIn.getScene().getWindow();
             stage.close();
             new Registrazione();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void nuovo(MouseEvent mouseEvent){
+        try {
+            new PaginaPrincipaleLogin();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
