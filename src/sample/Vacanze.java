@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Vacanze {
 
-    public SimpleStringProperty Città = new SimpleStringProperty();
+    public static SimpleStringProperty Città = new SimpleStringProperty();
     public SimpleStringProperty DataPartenza = new SimpleStringProperty();
     public SimpleStringProperty Lingua = new SimpleStringProperty();
     public SimpleIntegerProperty Durata = new SimpleIntegerProperty();
@@ -14,7 +14,7 @@ public class Vacanze {
         return Durata.get();
     }
 
-    public String getCittà() {
+    public static String getCittà() {
         return Città.get();
     }
 

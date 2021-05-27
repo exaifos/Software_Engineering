@@ -37,7 +37,7 @@ public class HomeController2 {
     private Text titolo;
 
 
-    public void showBooking(ActionEvent mouseEvent) {
+    public void showBooking(String città) {
         // mostra il profilo
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
@@ -95,9 +95,7 @@ public class HomeController2 {
         colCittà.setCellValueFactory(
                 new PropertyValueFactory<Vacanze,String>("Città"));
         colCittà.setText("Città");
-        colData.setCellValueFactory(
-                new PropertyValueFactory<Vacanze,String>("DataPartenza"));
-        colData.setText("Data di partenza");
+
         colLingua.setCellValueFactory(
                 new PropertyValueFactory<Vacanze,String>("Lingua"));
         colLingua.setText("Lingua");
@@ -106,11 +104,14 @@ public class HomeController2 {
         colDurata.setText("Durata");
         /*colBottone.setCellValueFactory(
                 new PropertyValueFactory<Vacanze,String>("Scelta"));*/
+        colData.setCellValueFactory(
+                new PropertyValueFactory<Vacanze,String>("DataPartenza"));
+        colData.setText("Data di partenza");
         Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>> cellFactory
                 = //
                 new Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>>() {
                     @Override
-                    public TableCell call(final TableColumn<Vacanze, String> param) {
+                    public TableCell call(finali TableColumn<Vacanze, String> param) {
                         final TableCell<Vacanze, String> cell = new TableCell<Vacanze, String>() {
 
                             final Button btn = new Button("Prenota");
@@ -125,8 +126,9 @@ public class HomeController2 {
                                     btn.setOnAction(event -> {
                                         // get data from tableview row
                                         // Vacanze vacanze = getTableView().getItems().get(getIndex());
+                                        String città = Vacanze.getCittà();
                                         //System.out.println("Città: " + vacanze.getCittà() + " Data di partenza: " + vacanze.getDataPartenza() + " Lingua: " + vacanze.getLingua() + " Durata " + vacanze.getDurata());
-                                        showBooking();
+                                        showBooking(città);
                                     });
                                     setGraphic(btn);
                                     setText(null);
@@ -136,6 +138,7 @@ public class HomeController2 {
                         return cell;
                     }
                 };
+        colBottone.setStyle("-fx-alignment: CENTER;");
         colBottone.setCellFactory(cellFactory);
         colBottone.setText("Prenota");
         ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata","Luogo","Data di partenza");
