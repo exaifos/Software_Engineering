@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 // qui si ricerca il parametro passato al costruttore all'interno della base di dati
 public class RicercaContenuto {
+
     static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
 
         // apertura connessione

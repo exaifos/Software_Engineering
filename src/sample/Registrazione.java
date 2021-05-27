@@ -16,7 +16,7 @@ public class Registrazione extends JFrame {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Home");
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root1, 891,745));
         stage.show();
 
     }

@@ -13,30 +13,44 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="745.0" prefWidth="891.0" style="-fx-background-color: #00C1FF;">
+      <AnchorPane prefHeight="745.0" prefWidth="891.0" style="-fx-background-color: #f8f3f2;">
          <children>
-            <ImageView id="userText" fitHeight="581.0" fitWidth="885.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="userText" fitHeight="745.0" fitWidth="900.0" layoutX="1.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="8.0">
                <image>
-                  <Image url="@Progetto%20senza%20titolo.png" />
+                  <Image url="@Login7.png" />
                </image></ImageView>
-            <Label layoutX="334.0" layoutY="248.0" prefHeight="46.0" prefWidth="199.0" text="Benvenuto" textFill="WHITE">
+            <Label layoutX="347.0" layoutY="259.0" prefHeight="46.0" prefWidth="199.0" text="Benvenuto" textFill="#393536" AnchorPane.bottomAnchor="440.0" AnchorPane.leftAnchor="347.0" AnchorPane.rightAnchor="345.0" AnchorPane.topAnchor="259.0">
                <font>
                   <Font name="Tahoma Bold" size="36.0" />
                </font>
             </Label>
-            <TextField fx:id="userText" layoutX="278.0" layoutY="344.0" onAction="#handleLoginClick" prefHeight="30.0" prefWidth="311.0" promptText="Username" />
-            <PasswordField fx:id="passText" layoutX="278.0" layoutY="420.0" onAction="#handleLoginClick" prefHeight="30.0" prefWidth="311.0" promptText="Password" />
-            <Button fx:id="Login" layoutX="460.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleLoginClick" prefHeight="32.0" prefWidth="73.0" text="Login">
+            <TextField fx:id="userText" layoutX="273.0" layoutY="345.0" onAction="#handleLoginClick" prefHeight="44.0" prefWidth="370.0" promptText="Username" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="345.0">
+               <font>
+                  <Font size="20.0" />
+               </font></TextField>
+            <PasswordField fx:id="passText" layoutX="273.0" layoutY="433.0" onAction="#handleLoginClick" prefHeight="44.0" prefWidth="370.0" promptText="Password" style="-fx-background-color: invisible;" AnchorPane.bottomAnchor="282.0" AnchorPane.leftAnchor="273.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="433.0">
+               <font>
+                  <Font size="20.0" />
+               </font></PasswordField>
+            <Button fx:id="Access" layoutX="467.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleLoginClick" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: transparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Login" textFill="#393536" AnchorPane.bottomAnchor="196.0" AnchorPane.leftAnchor="467.0" AnchorPane.rightAnchor="329.0" AnchorPane.topAnchor="511.0">
                <font>
                   <Font name="Tahoma" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="SignIn" layoutX="334.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#handleSignIpClick" text="Sign In">
+            <Button fx:id="SignIn" layoutX="336.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleSignIpClick" prefHeight="41.0" prefWidth="95.0" style="-fx-background-color: transparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Sign Up" textFill="#393536" AnchorPane.bottomAnchor="196.0" AnchorPane.leftAnchor="336.0" AnchorPane.rightAnchor="460.0" AnchorPane.topAnchor="511.0">
                <font>
                   <Font name="Tahoma" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="Exit" layoutX="856.0" layoutY="8.0" mnemonicParsing="false" onMouseClicked="#handleExitClick" prefHeight="25.0" prefWidth="21.0" />
+            <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="855.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@cancel_24px.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Exit" layoutX="855.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#handleExitClick" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="724.0" AnchorPane.leftAnchor="855.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="6.0">
+               <font>
+                  <Font size="8.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>
