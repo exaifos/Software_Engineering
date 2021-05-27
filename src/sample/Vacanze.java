@@ -3,6 +3,8 @@ package sample;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Date;
+
 public class Vacanze {
 
     public static SimpleStringProperty Città = new SimpleStringProperty();
@@ -23,6 +25,6 @@ public class Vacanze {
     }
 
     public String getDataPartenza() {
-        return DataPartenza.toString();
+        return DataPartenza.get();
     }
 }
