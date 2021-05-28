@@ -68,6 +68,7 @@ public class HomeController2 {
                         System.out.println("Durata: " + rs.getString("lingua"));
                         cm.Città.set(rs.getString("città"));
                         System.out.println("Durata: " + rs.getString("città"));
+                        //cm.DataPartenza.set(rs.getString("data_partenza"));
                         cm.DataPartenza.set(rs.getString("data_partenza"));
                         System.out.println("Durata: " + rs.getString("data_partenza"));
                         // add cm inside of data
@@ -92,26 +93,21 @@ public class HomeController2 {
     public void Initialize(MouseEvent mouseEvent) {
         assert TabellaVacanze != null : "fx:id=\"TabellaVacanze\" was not injected: check your FXML file 'Home.fxml'.";
         // setCellValueFactory for each column
-        colCittà.setCellValueFactory(
-                new PropertyValueFactory<Vacanze,String>("Città"));
+        colCittà.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Città"));
         colCittà.setText("Città");
-
-        colLingua.setCellValueFactory(
-                new PropertyValueFactory<Vacanze,String>("Lingua"));
+        colLingua.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Lingua"));
         colLingua.setText("Lingua");
-        colDurata.setCellValueFactory(
-                new PropertyValueFactory<Vacanze,Integer>("Durata"));
+        colDurata.setCellValueFactory(new PropertyValueFactory<Vacanze,Integer>("Durata"));
         colDurata.setText("Durata");
         /*colBottone.setCellValueFactory(
                 new PropertyValueFactory<Vacanze,String>("Scelta"));*/
-        colData.setCellValueFactory(
-                new PropertyValueFactory<Vacanze,String>("DataPartenza"));
+        colData.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("DataPartenza"));
         colData.setText("Data di partenza");
         Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>> cellFactory
                 = //
                 new Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>>() {
                     @Override
-                    public TableCell call(finali TableColumn<Vacanze, String> param) {
+                    public TableCell call(final TableColumn<Vacanze, String> param) {
                         final TableCell<Vacanze, String> cell = new TableCell<Vacanze, String>() {
 
                             final Button btn = new Button("Prenota");
@@ -126,9 +122,9 @@ public class HomeController2 {
                                     btn.setOnAction(event -> {
                                         // get data from tableview row
                                         // Vacanze vacanze = getTableView().getItems().get(getIndex());
-                                        String città = Vacanze.getCittà();
+                                        //String città = Vacanze.getCittà();
                                         //System.out.println("Città: " + vacanze.getCittà() + " Data di partenza: " + vacanze.getDataPartenza() + " Lingua: " + vacanze.getLingua() + " Durata " + vacanze.getDurata());
-                                        showBooking(città);
+                                        //showBooking(città);
                                     });
                                     setGraphic(btn);
                                     setText(null);
