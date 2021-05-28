@@ -376,7 +376,7 @@ public class HomeController {
         // setCellValueFactory for each column
         colCittà.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Città"));
         colCittà.setText("Città");
-        //colCittà.setStyle("-fx-alignment: CENTER;");
+        colCittà.setStyle("-fx-alignment: CENTER;");
         colLingua.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Lingua"));
         colLingua.setText("Lingua");
         colLingua.setStyle("-fx-alignment: CENTER;");
