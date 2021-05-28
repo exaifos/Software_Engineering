@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import javax.swing.text.html.ImageView;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -124,10 +125,10 @@ public class HomeController {
 
     public void setTableVisible(ActionEvent mouseEvent) {
         // mostra il catalogo delle vacanze
-        TabellaVacanze.setVisible(true);
         Scroll.setVisible(false);
         ChoiceBoxCatalogo.setVisible(true);
         titolo.setText("CATALOGO VACANZE");
+        titolo.setVisible(true);
     }
 
     public void transferMessage(String message1, String message2) {
@@ -339,22 +340,22 @@ public class HomeController {
                     ResultSet rs = databaseOperation.Vacation_return(query, selectedItem);
                     // put results inside of tableview
                     while(rs.next()){
-                        Vacanze cm = new Vacanze();
-                        cm.Durata.set(rs.getInt("durata"));
+                        Vacanze vacanze = new Vacanze();
+                        vacanze.Durata.set(rs.getInt("durata"));
                         System.out.println("Durata: " + rs.getInt("durata"));
-                        cm.Lingua.set(rs.getString("lingua"));
+                        vacanze.Lingua.set(rs.getString("lingua"));
                         System.out.println("Lingua: " + rs.getString("lingua"));
                         System.out.println("Città: " + rs.getString("città"));
-                        cm.Città.set(rs.getString("città"));
+                        vacanze.Città.set(rs.getString("città"));
                         // change String date format into dd-MM-yyyy
                         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
                         SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy");
                         String date = rs.getString("data_partenza");
                         Date dateValue = input.parse(date);
-                        cm.DataPartenza.set(output.format(dateValue));
+                        vacanze.DataPartenza.set(output.format(dateValue));
                         System.out.println("Durata: " + rs.getString("data_partenza"));
                         // add cm inside of data
-                        data.add(cm);
+                        data.add(vacanze);
                     }
                     // add data inside of tableview
                     TabellaVacanze.setVisible(true);
@@ -372,6 +373,8 @@ public class HomeController {
     //  ChoiceBox TableView initialization
     @FXML
     public void Initialize(MouseEvent mouseEvent) {
+        titolo.setVisible(true);
+        ChoiceBoxCatalogo.setVisible(true);
         assert TabellaVacanze != null : "fx:id=\"TabellaVacanze\" was not injected: check your FXML file 'Home.fxml'.";
         // setCellValueFactory for each column
         colCittà.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Città"));
@@ -406,9 +409,13 @@ public class HomeController {
                                     btn.setOnAction(event -> {
                                         // get data from tableview row
                                         Vacanze vacanze = getTableView().getItems().get(getIndex());
-                                        //String città = Vacanze.getCittà();
-                                        //System.out.println("Città: " + vacanze.getCittà() + " Data di partenza: " + vacanze.getDataPartenza() + " Lingua: " + vacanze.getLingua() + " Durata " + vacanze.getDurata());
-                                        //showBooking(città);
+                                        //TableRow row = getTableRow();
+                                        String Città = vacanze.getCittà();
+                                        String DataPartenza = vacanze.getDataPartenza();
+                                        String Lingua = vacanze.getLingua();
+                                        Integer Durata = vacanze.getDurata();
+                                        System.out.println("Città: " + vacanze.getCittà());
+                                        showBooking(Città, DataPartenza, Lingua, Durata);
                                     });
                                     setGraphic(btn);
                                     setText(null);
@@ -433,6 +440,11 @@ public class HomeController {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void showBooking(String città, String dataPartenza, String lingua, Integer durata) {
+        TabellaVacanze.setVisible(false);
+        ChoiceBoxCatalogo.setVisible(false);
     }
 
 

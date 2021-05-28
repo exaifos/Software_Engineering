@@ -41,7 +41,7 @@ public class databaseOperation {
             connection = DriverManager.getConnection(dbURL2, usermy, passmy);
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet result = statement.executeQuery();
-            result.next();
+            //result.next();
             return result;
         } catch (Exception ex) {
             ex.printStackTrace();
