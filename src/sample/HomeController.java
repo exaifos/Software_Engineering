@@ -17,6 +17,7 @@ import javafx.util.Callback;
 
 import javax.swing.text.html.ImageView;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -73,6 +74,13 @@ public class HomeController {
     private TableColumn lingua;
     private String CF;
     private String utente;
+    public Button famiglia;
+    public Button college;
+    public String cittàScelta;
+    public String dataPartenzaScelta;
+    public String linguaScelta;
+    public Integer durataScelta;
+    public Integer codiceScelta;
 
     private String password;
     private String password2;
@@ -334,13 +342,14 @@ public class HomeController {
             // clear data
             data.clear();
             if (selectedItem != null) {
-                String query = "SELECT durata,data_partenza,città,lingua FROM vacanza_college";
+                String query = "SELECT codice, durata,data_partenza,città,lingua FROM vacanza_college";
                 try {
                     // query result
                     ResultSet rs = databaseOperation.Vacation_return(query, selectedItem);
                     // put results inside of tableview
                     while(rs.next()){
                         Vacanze vacanze = new Vacanze();
+                        vacanze.Codice.set(rs.getInt("codice"));
                         vacanze.Durata.set(rs.getInt("durata"));
                         System.out.println("Durata: " + rs.getInt("durata"));
                         vacanze.Lingua.set(rs.getString("lingua"));
@@ -410,12 +419,14 @@ public class HomeController {
                                         // get data from tableview row
                                         Vacanze vacanze = getTableView().getItems().get(getIndex());
                                         //TableRow row = getTableRow();
-                                        String Città = vacanze.getCittà();
-                                        String DataPartenza = vacanze.getDataPartenza();
-                                        String Lingua = vacanze.getLingua();
-                                        Integer Durata = vacanze.getDurata();
+                                        Integer codice = vacanze.getCodice();
+                                        cittàScelta = vacanze.getCittà();
+                                        dataPartenzaScelta = vacanze.getDataPartenza();
+                                        linguaScelta = vacanze.getLingua();
+                                        durataScelta = vacanze.getDurata();
+                                        codiceScelta = vacanze.getCodice();
                                         System.out.println("Città: " + vacanze.getCittà());
-                                        showBooking(Città, DataPartenza, Lingua, Durata);
+                                        showBooking();
                                     });
                                     setGraphic(btn);
                                     setText(null);
@@ -442,14 +453,43 @@ public class HomeController {
         });
     }
 
-    private void showBooking(String città, String dataPartenza, String lingua, Integer durata) {
+    private void showBooking() {
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
+        titolo.setText("PRENOTAZIONE");
+        famiglia.setVisible(true);
+        college.setVisible(true);
     }
 
 
     public void handleExitClick(MouseEvent mouseEvent) {
         Stage stage = (Stage) Exit.getScene().getWindow();
         stage.close();
+    }
+
+    public void bookingFamiglia(MouseEvent mouseEvent) throws SQLException {
+        try {
+            famiglia.setVisible(false);
+            college.setVisible(false);
+            String query = "SELECT num_camere FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
+            ResultSet rs = databaseOperation.SQL_return(query);
+            System.out.println("rs");
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+            ResultSet result = null;
+        }
+    }
+
+    public void bookingCollege(MouseEvent mouseEvent) throws SQLException {
+        try {
+            famiglia.setVisible(true);
+            college.setVisible(true);
+
+        }
+        catch (Exception ex) {
+                ex.printStackTrace();
+                ResultSet result = null;
+        }
     }
 }

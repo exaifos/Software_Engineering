@@ -11,6 +11,7 @@ public class Vacanze {
     public SimpleStringProperty DataPartenza = new SimpleStringProperty();
     public SimpleStringProperty Lingua = new SimpleStringProperty();
     public SimpleIntegerProperty Durata = new SimpleIntegerProperty();
+    public SimpleIntegerProperty Codice = new SimpleIntegerProperty();
 
     public Integer getDurata() {
         return Durata.get();
@@ -26,5 +27,9 @@ public class Vacanze {
 
     public String getDataPartenza() {
         return DataPartenza.get();
+    }
+
+    public Integer getCodice() {
+        return Codice.get();
     }
 }

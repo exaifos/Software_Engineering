@@ -1020,16 +1020,19 @@ true posixrules
     </table>
     <table id="36" parent="17" name="prenotazione_college">
       <ObjectId>17101</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>sofia</Owner>
       <StateNumber>1258</StateNumber>
     </table>
     <table id="37" parent="17" name="prenotazione_default">
       <ObjectId>17104</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>sofia</Owner>
       <StateNumber>1260</StateNumber>
     </table>
     <table id="38" parent="17" name="prenotazione_famiglia">
       <ObjectId>17107</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>sofia</Owner>
       <StateNumber>1262</StateNumber>
     </table>

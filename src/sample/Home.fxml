@@ -181,6 +181,16 @@
                         <Font name="Tahoma Bold" size="20.0" />
                     </font>
                 </Text>
+            <Button fx:id="famiglia" layoutX="384.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#bookingFamiglia" prefHeight="73.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="FAMIGLIA" textFill="#393536" visible="false">
+               <font>
+                  <Font name="Tahoma" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="college" layoutX="579.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#bookingCollege" prefHeight="73.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="COLLEGE" textFill="#393536" visible="false">
+               <font>
+                  <Font name="Tahoma" size="18.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </children>
