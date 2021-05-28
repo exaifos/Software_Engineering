@@ -21,7 +21,7 @@ public class databaseOperation {
 
             if (selectedItem == "Durata")
                 query = query + (" ORDER BY durata");
-            else if (selectedItem == "Luogo")
+            else if (selectedItem == "Città")
                 query = query + (" ORDER BY città");
             else if (selectedItem == "Data di partenza")
                 query = query + (" ORDER BY data_partenza");
