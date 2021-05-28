@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Vacanze {
 
-    public static SimpleStringProperty Città = new SimpleStringProperty();
+    public SimpleStringProperty Città = new SimpleStringProperty();
     public SimpleStringProperty DataPartenza = new SimpleStringProperty();
     public SimpleStringProperty Lingua = new SimpleStringProperty();
     public SimpleIntegerProperty Durata = new SimpleIntegerProperty();
@@ -16,7 +16,7 @@ public class Vacanze {
         return Durata.get();
     }
 
-    public static String getCittà() {
+    public String getCittà() {
         return Città.get();
     }
 
