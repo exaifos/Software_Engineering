@@ -106,40 +106,75 @@ public class holderController {
 
     private int index2=1;
     public void newFamilyVacation(ActionEvent actionEvent) {
-        if (index2==1) {
+        if (pannello1.isVisible() && (college1.getText()==null || college1.getText().trim().isEmpty()|| indirizzo1.getText()==null || indirizzo1.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati del primo college");
+            alertMissing.showAndWait();
+        } else if (pannello2.isVisible() && (college2.getText()==null || college2.getText().trim().isEmpty() || indirizzo2.getText()==null || indirizzo2.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati del secondo college");
+            alertMissing.showAndWait();
+        } else if (pannello3.isVisible() && (college3.getText()==null || college3.getText().trim().isEmpty() || indirizzo3.getText()==null || indirizzo3.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati del terzo college");
+            alertMissing.showAndWait();
+        } else if (pannello4.isVisible() && (college4.getText()==null || college4.getText().trim().isEmpty() || indirizzo4.getText()==null || indirizzo4.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati del quarto college");
+            alertMissing.showAndWait();
+        } else if (index2==1) {
             pannello5.setVisible(true);
             index2++;
         } else if (index2==2) {
-            if (nomeFamText1.getText()==null || nomeFamText1.getText().trim().isEmpty() || cognomeText1.getText()==null || cognomeText1.getText().trim().isEmpty() || compText1.getText()==null || compText1.getText().trim().isEmpty() || dispText1.getText()==null || dispText1.getText().trim().isEmpty() || distText1.getText()==null || distText1.getText().trim().isEmpty() || bagniText1.getText()==null || bagniText1.getText().trim().isEmpty() || animaliText1.getText()==null || animaliText1.getText().trim().isEmpty()) {
+            if (nomeFamText1.getText()==null || nomeFamText1.getText().trim().isEmpty() || ospiti1.getText()==null || ospiti1.getText().trim().isEmpty() || cognomeText1.getText()==null || cognomeText1.getText().trim().isEmpty() || compText1.getText()==null || compText1.getText().trim().isEmpty() || dispText1.getText()==null || dispText1.getText().trim().isEmpty() || distText1.getText()==null || distText1.getText().trim().isEmpty() || bagniText1.getText()==null || bagniText1.getText().trim().isEmpty() || animaliText1.getText()==null || animaliText1.getText().trim().isEmpty()) {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
                 alertMissing.setHeaderText(null);
                 alertMissing.setContentText("Riempire prima i dati della prima famiglia");
+                alertMissing.showAndWait();
+            } else if (!compText1.getText().matches("[0-9]+") || !ospiti1.getText().matches("[0-9]+") ||!dispText1.getText().matches("[0-9]+") || !distText1.getText().matches("[0-9]+") || !bagniText1.getText().matches("[0-9]+") || !animaliText1.getText().matches("[0-9]+")) {
+                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+                alertMissing.setHeaderText(null);
+                alertMissing.setContentText("Riguardare i parametri numerici!");
                 alertMissing.showAndWait();
             } else {
                 pannello6.setVisible(true);
                 index2++;
             }
         } else if (index2==3) {
-            if (nomeFamText2.getText()==null || nomeFamText2.getText().trim().isEmpty() || cognomeText2.getText()==null || cognomeText2.getText().trim().isEmpty() || compText2.getText()==null || compText2.getText().trim().isEmpty() || dispText2.getText()==null || dispText2.getText().trim().isEmpty() || distText2.getText()==null || distText2.getText().trim().isEmpty() || bagniText2.getText()==null || bagniText2.getText().trim().isEmpty() || animaliText2.getText()==null || animaliText2.getText().trim().isEmpty()) {
+            if (nomeFamText2.getText()==null || nomeFamText2.getText().trim().isEmpty() || ospiti2.getText()==null || ospiti2.getText().trim().isEmpty() || cognomeText2.getText()==null || cognomeText2.getText().trim().isEmpty() || compText2.getText()==null || compText2.getText().trim().isEmpty() || dispText2.getText()==null || dispText2.getText().trim().isEmpty() || distText2.getText()==null || distText2.getText().trim().isEmpty() || bagniText2.getText()==null || bagniText2.getText().trim().isEmpty() || animaliText2.getText()==null || animaliText2.getText().trim().isEmpty()) {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
                 alertMissing.setHeaderText(null);
                 alertMissing.setContentText("Riempire prima i dati della seconda famiglia");
                 alertMissing.showAndWait();
-            } else {
+            } else if (!compText2.getText().matches("[0-9]+") || !ospiti2.getText().matches("[0-9]+") || !dispText2.getText().matches("[0-9]+") || !distText2.getText().matches("[0-9]+") || !bagniText2.getText().matches("[0-9]+") || !animaliText2.getText().matches("[0-9]+")) {
+                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+                alertMissing.setHeaderText(null);
+                alertMissing.setContentText("Riguardare i parametri numerici!");
+                alertMissing.showAndWait();
+            }else {
                 pannello7.setVisible(true);
                 index2++;
             }
         } else if (index2==4){
-            if (nomeFamText3.getText()==null || nomeFamText3.getText().trim().isEmpty() || cognomeText3.getText()==null || cognomeText3.getText().trim().isEmpty() || compText3.getText()==null || compText3.getText().trim().isEmpty() || dispText3.getText()==null || dispText3.getText().trim().isEmpty() || distText3.getText()==null || distText3.getText().trim().isEmpty() || bagniText3.getText()==null || bagniText3.getText().trim().isEmpty() || animaliText3.getText()==null || animaliText3.getText().trim().isEmpty()) {
+            if (nomeFamText3.getText()==null || nomeFamText3.getText().trim().isEmpty() || ospiti3.getText()==null || ospiti3.getText().trim().isEmpty() || cognomeText3.getText()==null || cognomeText3.getText().trim().isEmpty() || compText3.getText()==null || compText3.getText().trim().isEmpty() || dispText3.getText()==null || dispText3.getText().trim().isEmpty() || distText3.getText()==null || distText3.getText().trim().isEmpty() || bagniText3.getText()==null || bagniText3.getText().trim().isEmpty() || animaliText3.getText()==null || animaliText3.getText().trim().isEmpty()) {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
                 alertMissing.setHeaderText(null);
                 alertMissing.setContentText("Riempire prima i dati della terza famiglia");
                 alertMissing.showAndWait();
-            } else {
+            } else if (!compText3.getText().matches("[0-9]+") || !ospiti3.getText().matches("[0-9]+") || !dispText3.getText().matches("[0-9]+") || !distText3.getText().matches("[0-9]+") || !bagniText3.getText().matches("[0-9]+") || !animaliText3.getText().matches("[0-9]+")) {
+                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+                alertMissing.setHeaderText(null);
+                alertMissing.setContentText("Riguardare i parametri numerici!");
+                alertMissing.showAndWait();
+            }else {
                 pannello8.setVisible(true);
                 index2++;
             }
-        } else {
+        } else  {
             Alert alertMissing = new Alert(Alert.AlertType.ERROR);
             alertMissing.setHeaderText(null);
             alertMissing.setContentText("Non si possono aggiungere più di 4 vacanze in famiglia");
@@ -150,7 +185,27 @@ public class holderController {
 
     private int index=1;
     public void newCollegeVacation(ActionEvent actionEvent) {
-            if (index==1) {
+        if (pannello5.isVisible() && (nomeFamText1.getText()==null || nomeFamText1.getText().trim().isEmpty()  ||  ospiti1.getText()==null || ospiti1.getText().trim().isEmpty() || cognomeText1.getText()==null || cognomeText1.getText().trim().isEmpty() || compText1.getText()==null || compText1.getText().trim().isEmpty() || dispText1.getText()==null || dispText1.getText().trim().isEmpty() || distText1.getText()==null || distText1.getText().trim().isEmpty() || bagniText1.getText()==null || bagniText1.getText().trim().isEmpty() || animaliText1.getText()==null || animaliText1.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 1");
+            alertMissing.showAndWait();
+        } else if (pannello6.isVisible() && (nomeFamText2.getText()==null || nomeFamText2.getText().trim().isEmpty() ||  ospiti2.getText()==null || ospiti2.getText().trim().isEmpty() ||cognomeText2.getText()==null || cognomeText2.getText().trim().isEmpty() || compText2.getText()==null || compText2.getText().trim().isEmpty() || dispText2.getText()==null || dispText2.getText().trim().isEmpty() || distText2.getText()==null || distText2.getText().trim().isEmpty() || bagniText2.getText()==null || bagniText2.getText().trim().isEmpty() || animaliText2.getText()==null || animaliText2.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 2");
+            alertMissing.showAndWait();
+        } else if (pannello7.isVisible() && (nomeFamText3.getText()==null || nomeFamText3.getText().trim().isEmpty() || ospiti3.getText()==null || ospiti3.getText().trim().isEmpty() || cognomeText3.getText()==null || cognomeText3.getText().trim().isEmpty() || compText3.getText()==null || compText3.getText().trim().isEmpty() || dispText3.getText()==null || dispText3.getText().trim().isEmpty() || distText3.getText()==null || distText3.getText().trim().isEmpty() || bagniText3.getText()==null || bagniText3.getText().trim().isEmpty() || animaliText3.getText()==null || animaliText3.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 3");
+            alertMissing.showAndWait();
+        } else if (pannello8.isVisible() && (nomeFamText4.getText()==null || nomeFamText4.getText().trim().isEmpty() ||  ospiti4.getText()==null || ospiti4.getText().trim().isEmpty() ||cognomeText4.getText()==null || cognomeText4.getText().trim().isEmpty() || compText4.getText()==null || compText4.getText().trim().isEmpty() || dispText4.getText()==null || dispText4.getText().trim().isEmpty() || distText4.getText()==null || distText4.getText().trim().isEmpty() || bagniText4.getText()==null || bagniText4.getText().trim().isEmpty() || animaliText4.getText()==null || animaliText4.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 4");
+            alertMissing.showAndWait();
+        } else if (index==1) {
                 pannello1.setVisible(true);
                 index++;
             } else if (index==2) {
@@ -183,7 +238,7 @@ public class holderController {
                     pannello4.setVisible(true);
                     index++;
                 }
-            } else {
+            } else  {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
                 alertMissing.setHeaderText(null);
                 alertMissing.setContentText("Non si possono aggiungere più di 4 vacanze in un college");
