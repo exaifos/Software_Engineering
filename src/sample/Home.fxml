@@ -46,6 +46,11 @@
                     <font>
                         <Font size="8.0" />
                     </font></Button>
+                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="638.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@worldmap.PNG" />
+                </image>
+                </ImageView>
                 <ChoiceBox id="ChoiceBoxCatalogo" fx:id="ChoiceBoxCatalogo" layoutX="732.0" layoutY="194.0" onMouseClicked="#Initialize" prefHeight="27.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #393536; -fx-border-radius: 20px;" visible="false" AnchorPane.bottomAnchor="551.0" AnchorPane.leftAnchor="732.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="194.0" />
                 <Button fx:id="vac_eff" layoutX="40.0" layoutY="514.0" mnemonicParsing="false" onAction="#setTableVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Catalogo" textFill="#393536">
                     <font>

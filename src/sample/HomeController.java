@@ -10,14 +10,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import javax.swing.text.html.ImageView;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -91,7 +89,7 @@ public class HomeController {
     private String hobbyNew;
     private String precauzioniNew;
     private String emailGenTextNew;
-
+    public ImageView worldmap;
     // prenotazione
     public Label testo_preferenze;
     public ScrollPane vacanze_famiglia_info;
@@ -148,6 +146,7 @@ public class HomeController {
     }
 
     public void setTableVisible(ActionEvent mouseEvent) {
+        worldmap.setVisible(false);
         vacanze_famiglia_info.setVisible(false);
         // mostra il catalogo delle vacanze
         Scroll.setVisible(false);
