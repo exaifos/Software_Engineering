@@ -151,7 +151,7 @@
                                 </TextField>
                                 <ImageView fitHeight="20.0" fitWidth="19.0" layoutX="576.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@key_32px.png" />
+                                        <Image url="@pen.png" />
                                     </image>
                                 </ImageView>
                                 <Button fx:id="Modifica" layoutX="561.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#modify" prefHeight="27.0" prefWidth="41.0" style="-fx-background-color: transparent;">
