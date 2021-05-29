@@ -7,7 +7,6 @@ import java.sql.Statement;
 
 // qui si ricerca il parametro passato al costruttore all'interno della base di dati
 public class RicercaContenuto {
-
     static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
 
         // apertura connessione
@@ -15,9 +14,9 @@ public class RicercaContenuto {
         Statement selectStmt = null;
         try {
             // Connect
-            String dbURL2 = "jdbc:postgresql://localhost:5432/vacanze_studio";
-            String user = "sofia";
-            String pass = "";
+            String dbURL2 = "jdbc:postgresql://localhost:5432/postgres";
+            String user = "postgres";
+            String pass = "123Asdf?";
 
             connection = DriverManager.getConnection(dbURL2, user, pass);
             if (connection != null) {

@@ -9,19 +9,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.swing.text.html.ListView;
 import java.io.IOException;
 
-
-public class Home {
+public class Titolare {
 
     @FXML
     public Text nomeLogin;
-    public Home(String CF, String nome_user) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
+    public Titolare(String CF, String nome_user) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("titolarePage.fxml"));
         Parent root1 = fxmlLoader.load();
         //Get controller of scene2
-        HomeController hc = fxmlLoader.getController();
+        holderController hc = fxmlLoader.getController();
         //Pass whatever data you want. You can have multiple method calls here
         hc.transferMessage(CF, nome_user);
 

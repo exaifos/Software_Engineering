@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -15,6 +16,7 @@ public class Controller {
     @FXML
     public Button Avanti;
     public ChoiceBox sessoText;
+    public Button Nuovo;
     @FXML
     private TextField userText;
     @FXML
@@ -22,9 +24,11 @@ public class Controller {
     @FXML
     private PasswordField pass2Text;
     @FXML
-    public Button Access;
+    public Button Login;
     @FXML
     public Button SignIn;
+    @FXML
+    public Button Start;
     @FXML
     public Button Exit;
     @FXML
@@ -34,11 +38,7 @@ public class Controller {
     public String order;
     public String dataN;
     public String luogoN;
-    public Button Nuovo;
-    @FXML
-    public Button Login;
-    @FXML
-    public Button Start;
+
     @FXML
     public DatePicker dataNText;
     @FXML
@@ -82,6 +82,8 @@ public class Controller {
     private String allergeni;
     private String hobby;
     private String cf;
+    @FXML
+    public Button Access;
 
     public void handleLoginClick(ActionEvent event) {
         // dobbiamo prendere i dati di login e la password per confrontarli con la base di dati
@@ -236,4 +238,5 @@ public class Controller {
             ex.printStackTrace();
         }
     }
+
 }
