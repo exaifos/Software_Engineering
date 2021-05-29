@@ -11,6 +11,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -81,7 +83,6 @@ public class HomeController {
     public String linguaScelta;
     public Integer durataScelta;
     public Integer codiceScelta;
-
     private String password;
     private String password2;
     private String emailNew;
@@ -91,6 +92,21 @@ public class HomeController {
     private String precauzioniNew;
     private String emailGenTextNew;
 
+    // prenotazione
+    public Label testo_preferenze;
+    public ScrollPane vacanze_famiglia_info;
+    public TextField cittàText;
+    public TextField durataText;
+    public TextField linguaText;
+    public TextField dataText;
+    public TextField nomeFamigliaText;
+    public TextField cognomeFamigliaText;
+    public TextField componentiText;
+    public TextField camereText;
+    public TextField bagniText;
+    public TextField animaliText;
+    public TextField nomeAmicoText;
+    public TextField mailAmicoText;
 
     public void showProfile(ActionEvent mouseEvent) {
         // mostra il profilo
@@ -132,8 +148,11 @@ public class HomeController {
     }
 
     public void setTableVisible(ActionEvent mouseEvent) {
+        vacanze_famiglia_info.setVisible(false);
         // mostra il catalogo delle vacanze
         Scroll.setVisible(false);
+        //Font font = Font.loadFont("file:rsc/sample/Glegoo-Bold.ttf", 45);
+        //titolo.setFont(font);
         ChoiceBoxCatalogo.setVisible(true);
         titolo.setText("CATALOGO VACANZE");
         titolo.setVisible(true);
@@ -471,9 +490,31 @@ public class HomeController {
         try {
             famiglia.setVisible(false);
             college.setVisible(false);
-            String query = "SELECT num_camere FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
+            String query = "SELECT num_camere, nome_capo_fam, cognome_capo_fam, num_componenti, num_bagni, num_animali FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
             ResultSet rs = databaseOperation.SQL_return(query);
-            System.out.println("rs");
+            rs.next();
+            Integer num_camere = rs.getInt("num_camere");
+            if (num_camere >= 1) {
+                vacanze_famiglia_info.setVisible(true);
+                testo_preferenze.setText("E' possibile specificare il nome e l'indirizzo mail di un amico\nche soggornerà nella stessa famiglia: ");
+                cittàText.setText(cittàScelta);
+                durataText.setText(String.valueOf(durataScelta));
+                linguaText.setText(linguaScelta);
+                dataText.setText(dataPartenzaScelta);
+                nomeFamigliaText.setText(rs.getString("nome_capo_fam"));
+                cognomeFamigliaText.setText(rs.getString("cognome_capo_fam"));
+                componentiText.setText(rs.getString("num_componenti"));
+                camereText.setText(rs.getString("num_camere"));
+                bagniText.setText(rs.getString("num_bagni"));
+                if (Integer.parseInt(rs.getString("num_animali")) == 0) {
+                    animaliText.setText("Nessun animale");
+                }
+                else {
+                    animaliText.setText(String.valueOf(rs.getString("num_animali")));
+                }
+                String nomeAmico = nomeAmicoText.getText();
+                String mailAmico = mailAmicoText.getText();
+            }
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -483,8 +524,8 @@ public class HomeController {
 
     public void bookingCollege(MouseEvent mouseEvent) throws SQLException {
         try {
-            famiglia.setVisible(true);
-            college.setVisible(true);
+            famiglia.setVisible(false);
+            college.setVisible(false);
 
         }
         catch (Exception ex) {
