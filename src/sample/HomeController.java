@@ -1,5 +1,12 @@
 package sample;
 
+/*
+        nomeLogin.setX(45.0);
+        nomeLogin.setY(343.0);
+        nomeLogin.prefWidth(147.0);
+        nomeLogin.setFont(Font.font ("Tahoma", 18));
+ */
+
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,11 +30,8 @@ import java.util.Date;
 
 
 public class HomeController {
-    @FXML
     public TableView TabellaVacanze;
-    @FXML
     public Button Exit;
-    @FXML
     public Button Profilo;
     @FXML
     private ChoiceBox<Object> ChoiceBoxCatalogo;
@@ -42,6 +46,12 @@ public class HomeController {
     private TableColumn<Vacanze, String> colLingua;
     @FXML
     private TableColumn<Vacanze, String> colBottone;
+    public TableView tabellaGite;
+    public TableColumn colDestinazione;
+    public TableColumn colOre;
+    public TableColumn colCosto;
+    public TableColumn colDescrizione;
+    public TableColumn colFamiglia = new TableColumn<Vacanze,String>();
     @FXML
     public Label nomeUtente;
     @FXML
@@ -89,7 +99,9 @@ public class HomeController {
     private String hobbyNew;
     private String precauzioniNew;
     private String emailGenTextNew;
+    public Label testoScelta;
     public ImageView worldmap;
+    public String scelta;
     // prenotazione
     public Label testo_preferenze;
     public ScrollPane vacanze_famiglia_info;
@@ -108,6 +120,9 @@ public class HomeController {
 
     public void showProfile(ActionEvent mouseEvent) {
         // mostra il profilo
+        testoScelta.setVisible(false);
+        college.setVisible(false);
+        famiglia.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
         Scroll.setVisible(true);
@@ -145,14 +160,19 @@ public class HomeController {
         System.out.println(CF);
     }
 
-    public void setTableVisible(ActionEvent mouseEvent) {
+    public void setTableVisible(MouseEvent mouseEvent) {
+        testoScelta.setVisible(false);
+        college.setVisible(false);
+        famiglia.setVisible(false);
         worldmap.setVisible(false);
         vacanze_famiglia_info.setVisible(false);
-        // mostra il catalogo delle vacanze
         Scroll.setVisible(false);
         //Font font = Font.loadFont("file:rsc/sample/Glegoo-Bold.ttf", 45);
         //titolo.setFont(font);
         ChoiceBoxCatalogo.setVisible(true);
+        ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata","Città","Data di partenza");
+        // view choicebox options
+        ChoiceBoxCatalogo.setItems(viewOptions);
         titolo.setText("CATALOGO VACANZE");
         titolo.setVisible(true);
     }
@@ -192,6 +212,7 @@ public class HomeController {
 
     public void setName(MouseEvent mouseEvent) {
         nomeLogin.setText(utente);
+        nomeLogin.setStyle("-fx-alignment: CENTER;");
     }
 
     public void returnBack(ActionEvent mouseEvent) {
@@ -340,16 +361,30 @@ public class HomeController {
         }
     }
 
-    public void showBooking(String città) {
-        // mostra il profilo
+    public void setButtonVisible(ActionEvent actionEvent) {
+        testoScelta.setVisible(true);
+        worldmap.setVisible(false);
+        Scroll.setVisible(false);
+        vacanze_famiglia_info.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
+        scelta = null;
+        famiglia.setVisible(true);
+        college.setVisible(true);
         titolo.setText("PRENOTAZIONE");
+        famiglia.setOnAction(event -> {
+            System.out.println("Famiglia");
+            scelta = "vacanza_famiglia";
+        });
+        college.setOnAction(event -> {
+            scelta = "vacanza_college";
+        });
     }
 
     // TableView data visualization
     public void buildData(Object selectedItem) {
         try {
+            testoScelta.setVisible(false);
             // hide table
             TabellaVacanze.setVisible(false);
             // clear table
@@ -360,7 +395,13 @@ public class HomeController {
             // clear data
             data.clear();
             if (selectedItem != null) {
-                String query = "SELECT codice, durata,data_partenza,città,lingua FROM vacanza_college";
+                String query;
+                if (scelta == "vacanza_famiglia") {
+                    query = "SELECT codice, durata,data_partenza,città,lingua,cognome_capo_fam FROM " + scelta;
+                }
+                else {
+                    query = "SELECT codice, durata,data_partenza,città,lingua FROM " + scelta;
+                }
                 try {
                     // query result
                     ResultSet rs = databaseOperation.Vacation_return(query, selectedItem);
@@ -381,13 +422,22 @@ public class HomeController {
                         Date dateValue = input.parse(date);
                         vacanze.DataPartenza.set(output.format(dateValue));
                         System.out.println("Durata: " + rs.getString("data_partenza"));
+                        if(scelta == "vacanza_famiglia") {
+                            String cognome_capo_fam = rs.getString("cognome_capo_fam");
+                            vacanze.Famiglia.set(cognome_capo_fam);
+                        }
                         // add cm inside of data
                         data.add(vacanze);
                     }
                     // add data inside of tableview
                     TabellaVacanze.setVisible(true);
                     TabellaVacanze.setItems(data);
-                    TabellaVacanze.getColumns().addAll(colCittà,colData,colLingua,colDurata,colBottone);
+                    if (scelta == "vacanza_famiglia") {
+                        TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colFamiglia, colBottone);
+                    }
+                    else {
+                        TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colBottone);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -400,6 +450,7 @@ public class HomeController {
     //  ChoiceBox TableView initialization
     @FXML
     public void Initialize(MouseEvent mouseEvent) {
+        testoScelta.setVisible(false);
         titolo.setVisible(true);
         ChoiceBoxCatalogo.setVisible(true);
         assert TabellaVacanze != null : "fx:id=\"TabellaVacanze\" was not injected: check your FXML file 'Home.fxml'.";
@@ -416,6 +467,11 @@ public class HomeController {
         colData.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("DataPartenza"));
         colData.setText("Data di partenza");
         colData.setStyle("-fx-alignment: CENTER;");
+        if (scelta == "vacanza_famiglia") {
+            colFamiglia.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Famiglia"));
+            colFamiglia.setText("Famiglia");
+            colFamiglia.setStyle("-fx-alignment: CENTER;");
+        }
         // set colum with buttons for each row
         Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>> cellFactory
                 = //
@@ -424,7 +480,7 @@ public class HomeController {
                     public TableCell call(final TableColumn<Vacanze, String> param) {
                         final TableCell<Vacanze, String> cell = new TableCell<Vacanze, String>() {
 
-                            final Button btn = new Button("Prenota");
+                            final Button btn = new Button("Visualizza");
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -444,7 +500,16 @@ public class HomeController {
                                         durataScelta = vacanze.getDurata();
                                         codiceScelta = vacanze.getCodice();
                                         System.out.println("Città: " + vacanze.getCittà());
-                                        showBooking();
+                                        try {
+                                            if(scelta == "vacanza_famiglia") {
+                                                bookingFamiglia();
+                                            }
+                                            else {
+                                                bookingCollege();
+                                            }
+                                        } catch (SQLException throwables) {
+                                            throwables.printStackTrace();
+                                        }
                                     });
                                     setGraphic(btn);
                                     setText(null);
@@ -456,10 +521,7 @@ public class HomeController {
                 };
         colBottone.setStyle("-fx-alignment: CENTER;");
         colBottone.setCellFactory(cellFactory);
-        colBottone.setText("Prenota");
-        ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata","Città","Data di partenza");
-        // view choicebox options
-        ChoiceBoxCatalogo.setItems(viewOptions);
+        colBottone.setText("Visualizza");
         // handle choicebox selection on mouse click
         ChoiceBoxCatalogo.setOnAction((event) -> {
             Object selectedItem = ChoiceBoxCatalogo.getValue();
@@ -471,24 +533,18 @@ public class HomeController {
         });
     }
 
-    private void showBooking() {
-        TabellaVacanze.setVisible(false);
-        ChoiceBoxCatalogo.setVisible(false);
-        titolo.setText("PRENOTAZIONE");
-        famiglia.setVisible(true);
-        college.setVisible(true);
-    }
-
 
     public void handleExitClick(MouseEvent mouseEvent) {
         Stage stage = (Stage) Exit.getScene().getWindow();
         stage.close();
     }
 
-    public void bookingFamiglia(MouseEvent mouseEvent) throws SQLException {
+    public void bookingFamiglia() throws SQLException {
         try {
+            TabellaVacanze.setVisible(false);
             famiglia.setVisible(false);
             college.setVisible(false);
+            System.out.println("CODICE SCELTA: " + codiceScelta);
             String query = "SELECT num_camere, nome_capo_fam, cognome_capo_fam, num_componenti, num_bagni, num_animali FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
             ResultSet rs = databaseOperation.SQL_return(query);
             rs.next();
@@ -513,6 +569,25 @@ public class HomeController {
                 }
                 String nomeAmico = nomeAmicoText.getText();
                 String mailAmico = mailAmicoText.getText();
+                // gite
+                assert tabellaGite != null : "fx:id=\"tabellaGite\" was not injected: check your FXML file 'Home.fxml'.";
+                // setCellValueFactory for each column
+                colDestinazione.setCellValueFactory(new PropertyValueFactory<Gita,String>("Destinazione"));
+                colDestinazione.setText("Destinazione");
+                colCosto.setCellValueFactory(new PropertyValueFactory<Gita,Integer>("Costo"));
+                colCosto.setText("Prezzo");
+                colCosto.setStyle("-fx-alignment: CENTER;");
+                colOre.setCellValueFactory(new PropertyValueFactory<Gita,Integer>("Ore"));
+                colOre.setText("Ore");
+                colOre.setStyle("-fx-alignment: CENTER;");
+                colDescrizione.setCellValueFactory(new PropertyValueFactory<Gita,String>("Descrizione"));
+                colDescrizione.setText("Descrizione");
+            }
+            else {
+                Alert alertIncorrect = new Alert(Alert.AlertType.ERROR);
+                alertIncorrect.setHeaderText(null);
+                alertIncorrect.setContentText("Ci dispiace, non ci sono più posti disponibili in questa famiglia.");
+                alertIncorrect.showAndWait();
             }
         }
         catch (Exception ex) {
@@ -521,15 +596,15 @@ public class HomeController {
         }
     }
 
-    public void bookingCollege(MouseEvent mouseEvent) throws SQLException {
+    public void bookingCollege() throws SQLException {
         try {
+            TabellaVacanze.setVisible(false);
             famiglia.setVisible(false);
             college.setVisible(false);
-
         }
         catch (Exception ex) {
-                ex.printStackTrace();
-                ResultSet result = null;
+            ex.printStackTrace();
+            ResultSet result = null;
         }
     }
 }

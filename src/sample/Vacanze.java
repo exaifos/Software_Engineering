@@ -8,6 +8,7 @@ import java.util.Date;
 public class Vacanze {
 
     public SimpleStringProperty Città = new SimpleStringProperty();
+    public SimpleStringProperty Famiglia = new SimpleStringProperty();
     public SimpleStringProperty DataPartenza = new SimpleStringProperty();
     public SimpleStringProperty Lingua = new SimpleStringProperty();
     public SimpleIntegerProperty Durata = new SimpleIntegerProperty();
@@ -31,5 +32,8 @@ public class Vacanze {
 
     public Integer getCodice() {
         return Codice.get();
+    }
+    public String getFamiglia() {
+        return Famiglia.get();
     }
 }
