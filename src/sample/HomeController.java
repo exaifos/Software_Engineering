@@ -25,6 +25,7 @@ import javafx.util.Callback;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -158,23 +159,6 @@ public class HomeController {
         }
         nomeUtenteText.setVisible(true);
         System.out.println(CF);
-    }
-
-    public void setTableVisible(MouseEvent mouseEvent) {
-        testoScelta.setVisible(false);
-        college.setVisible(false);
-        famiglia.setVisible(false);
-        worldmap.setVisible(false);
-        vacanze_famiglia_info.setVisible(false);
-        Scroll.setVisible(false);
-        //Font font = Font.loadFont("file:rsc/sample/Glegoo-Bold.ttf", 45);
-        //titolo.setFont(font);
-        ChoiceBoxCatalogo.setVisible(true);
-        ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata","Città","Data di partenza");
-        // view choicebox options
-        ChoiceBoxCatalogo.setItems(viewOptions);
-        titolo.setText("CATALOGO VACANZE");
-        titolo.setVisible(true);
     }
 
     public void transferMessage(String message1, String message2) {
@@ -381,9 +365,57 @@ public class HomeController {
         });
     }
 
+    public void setTableVisible(MouseEvent mouseEvent) {
+        TableColumns();
+        testoScelta.setVisible(false);
+        college.setVisible(false);
+        famiglia.setVisible(false);
+        worldmap.setVisible(false);
+        vacanze_famiglia_info.setVisible(false);
+        Scroll.setVisible(false);
+        //Font font = Font.loadFont("file:rsc/sample/Glegoo-Bold.ttf", 45);
+        //titolo.setFont(font);
+        ChoiceBoxCatalogo.setVisible(true);
+        ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata","Città","Data di partenza");
+        // view choicebox options
+        ChoiceBoxCatalogo.setItems(viewOptions);
+        titolo.setText("CATALOGO VACANZE");
+        titolo.setVisible(true);
+        TabellaVacanze.getItems().clear();
+        // clear columns
+        TabellaVacanze.getColumns().clear();
+        data = FXCollections.observableArrayList();
+        // clear data
+        data.clear();
+        String query;
+        if (scelta == "vacanza_famiglia") {
+            query = "SELECT codice, durata,data_partenza,città,lingua,cognome_capo_fam FROM " + scelta;
+        }
+        else {
+            query = "SELECT codice, durata,data_partenza,città,lingua FROM " + scelta;
+        }
+        try {
+            // query result
+            ResultSet rs = databaseOperation.Vacation_return(query,"");
+            // put results inside of tableview
+            data = FillTableVacanze(rs);
+            // add data inside of tableview
+            TabellaVacanze.setItems(data);
+            TabellaVacanze.setVisible(true);
+            if (scelta == "vacanza_famiglia") {
+                TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colFamiglia, colBottone);
+            } else {
+                TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colBottone);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // TableView data visualization
     public void buildData(Object selectedItem) {
         try {
+            TableColumns();
             testoScelta.setVisible(false);
             // hide table
             TabellaVacanze.setVisible(false);
@@ -406,29 +438,7 @@ public class HomeController {
                     // query result
                     ResultSet rs = databaseOperation.Vacation_return(query, selectedItem);
                     // put results inside of tableview
-                    while(rs.next()){
-                        Vacanze vacanze = new Vacanze();
-                        vacanze.Codice.set(rs.getInt("codice"));
-                        vacanze.Durata.set(rs.getInt("durata"));
-                        System.out.println("Durata: " + rs.getInt("durata"));
-                        vacanze.Lingua.set(rs.getString("lingua"));
-                        System.out.println("Lingua: " + rs.getString("lingua"));
-                        System.out.println("Città: " + rs.getString("città"));
-                        vacanze.Città.set(rs.getString("città"));
-                        // change String date format into dd-MM-yyyy
-                        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
-                        SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy");
-                        String date = rs.getString("data_partenza");
-                        Date dateValue = input.parse(date);
-                        vacanze.DataPartenza.set(output.format(dateValue));
-                        System.out.println("Durata: " + rs.getString("data_partenza"));
-                        if(scelta == "vacanza_famiglia") {
-                            String cognome_capo_fam = rs.getString("cognome_capo_fam");
-                            vacanze.Famiglia.set(cognome_capo_fam);
-                        }
-                        // add cm inside of data
-                        data.add(vacanze);
-                    }
+                    data = FillTableVacanze(rs);
                     // add data inside of tableview
                     TabellaVacanze.setVisible(true);
                     TabellaVacanze.setItems(data);
@@ -447,12 +457,34 @@ public class HomeController {
         }
     }
 
-    //  ChoiceBox TableView initialization
-    @FXML
-    public void Initialize(MouseEvent mouseEvent) {
-        testoScelta.setVisible(false);
-        titolo.setVisible(true);
-        ChoiceBoxCatalogo.setVisible(true);
+    public ObservableList<Vacanze> FillTableVacanze(ResultSet rs) throws SQLException {
+        try {
+            while (rs.next()) {
+                Vacanze vacanze = new Vacanze();
+                vacanze.Codice.set(rs.getInt("codice"));
+                vacanze.Durata.set(rs.getInt("durata"));
+                vacanze.Lingua.set(capitalize(rs.getString("lingua")));
+                vacanze.Città.set((capitalize(rs.getString("città"))));
+                // change String date format into dd-MM-yyyy
+                SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy");
+                String date = rs.getString("data_partenza");
+                Date dateValue = input.parse(date);
+                vacanze.DataPartenza.set(output.format(dateValue));
+                System.out.println("Durata: " + rs.getString("data_partenza"));
+                if (scelta == "vacanza_famiglia") {
+                    vacanze.Famiglia.set(capitalize(rs.getString("cognome_capo_fam")));
+                }
+                // add cm inside of data
+                data.add(vacanze);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public void TableColumns() {
         assert TabellaVacanze != null : "fx:id=\"TabellaVacanze\" was not injected: check your FXML file 'Home.fxml'.";
         // setCellValueFactory for each column
         colCittà.setCellValueFactory(new PropertyValueFactory<Vacanze,String>("Città"));
@@ -522,6 +554,14 @@ public class HomeController {
         colBottone.setStyle("-fx-alignment: CENTER;");
         colBottone.setCellFactory(cellFactory);
         colBottone.setText("Visualizza");
+    }
+
+    //  ChoiceBox TableView initialization
+    @FXML
+    public void Initialize(MouseEvent mouseEvent) {
+        testoScelta.setVisible(false);
+        titolo.setVisible(true);
+        ChoiceBoxCatalogo.setVisible(true);
         // handle choicebox selection on mouse click
         ChoiceBoxCatalogo.setOnAction((event) -> {
             Object selectedItem = ChoiceBoxCatalogo.getValue();
@@ -539,6 +579,11 @@ public class HomeController {
         stage.close();
     }
 
+    public String capitalize(String str) {
+        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        return cap;
+    }
+
     public void bookingFamiglia() throws SQLException {
         try {
             TabellaVacanze.setVisible(false);
@@ -552,12 +597,17 @@ public class HomeController {
             if (num_camere >= 1) {
                 vacanze_famiglia_info.setVisible(true);
                 testo_preferenze.setText("E' possibile specificare il nome e l'indirizzo mail di un amico\nche soggornerà nella stessa famiglia: ");
-                cittàText.setText(cittàScelta);
-                durataText.setText(String.valueOf(durataScelta));
-                linguaText.setText(linguaScelta);
+                cittàText.setText(capitalize(cittàScelta));
+                if (durataScelta > 1) {
+                    durataText.setText(String.valueOf(durataScelta) + " settimane");
+                }
+                else {
+                    durataText.setText(String.valueOf(durataScelta) + " settimana");
+                }
+                linguaText.setText(capitalize(linguaScelta));
                 dataText.setText(dataPartenzaScelta);
-                nomeFamigliaText.setText(rs.getString("nome_capo_fam"));
-                cognomeFamigliaText.setText(rs.getString("cognome_capo_fam"));
+                nomeFamigliaText.setText(capitalize(rs.getString("nome_capo_fam")));
+                cognomeFamigliaText.setText(capitalize(rs.getString("cognome_capo_fam")));
                 componentiText.setText(rs.getString("num_componenti"));
                 camereText.setText(rs.getString("num_camere"));
                 bagniText.setText(rs.getString("num_bagni"));
@@ -565,7 +615,12 @@ public class HomeController {
                     animaliText.setText("Nessun animale");
                 }
                 else {
-                    animaliText.setText(String.valueOf(rs.getString("num_animali")));
+                    if (rs.getString("num_animali") == "1") {
+                        animaliText.setText(String.valueOf(rs.getString("num_animali")) + " animale");
+                    }
+                    else {
+                        animaliText.setText(String.valueOf(rs.getString("num_animali") + " animali"));
+                    }
                 }
                 String nomeAmico = nomeAmicoText.getText();
                 String mailAmico = mailAmicoText.getText();
