@@ -129,7 +129,7 @@
                               <TextField fx:id="distText1" layoutX="191.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="301.0" layoutY="122.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di bagni*:" wrapText="true" />
                               <TextField fx:id="bagniText1" layoutX="468.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
-                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici:" wrapText="true" />
+                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici*:" wrapText="true" />
                               <TextField fx:id="animaliText1" layoutX="781.0" layoutY="142.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="670.0" layoutY="67.0" prefHeight="36.0" prefWidth="126.0" text="Inserisci il numero di ragazzi ospitabili*:" wrapText="true" />
                               <TextField fx:id="ospiti1" layoutX="822.0" layoutY="71.0" prefHeight="25.0" prefWidth="68.0" />
@@ -149,7 +149,7 @@
                               <TextField fx:id="distText2" layoutX="191.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="301.0" layoutY="122.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di bagni*:" wrapText="true" />
                               <TextField fx:id="bagniText2" layoutX="468.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
-                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici:" wrapText="true" />
+                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici*:" wrapText="true" />
                               <TextField fx:id="animaliText2" layoutX="781.0" layoutY="142.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="670.0" layoutY="67.0" prefHeight="36.0" prefWidth="126.0" text="Inserisci il numero di ragazzi ospitabili*:" wrapText="true" />
                               <TextField fx:id="ospiti2" layoutX="822.0" layoutY="71.0" prefHeight="25.0" prefWidth="68.0" />
@@ -169,7 +169,7 @@
                               <TextField fx:id="distText3" layoutX="191.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="301.0" layoutY="122.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di bagni*:" wrapText="true" />
                               <TextField fx:id="bagniText3" layoutX="468.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
-                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici:" wrapText="true" />
+                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici*:" wrapText="true" />
                               <TextField fx:id="animaliText3" layoutX="781.0" layoutY="142.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="670.0" layoutY="67.0" prefHeight="36.0" prefWidth="126.0" text="Inserisci il numero di ragazzi ospitabili*:" wrapText="true" />
                               <TextField fx:id="ospiti3" layoutX="822.0" layoutY="71.0" prefHeight="25.0" prefWidth="68.0" />
@@ -189,7 +189,7 @@
                               <TextField fx:id="distText4" layoutX="191.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="301.0" layoutY="122.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di bagni*:" wrapText="true" />
                               <TextField fx:id="bagniText4" layoutX="468.0" layoutY="143.0" prefHeight="25.0" prefWidth="68.0" />
-                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici:" wrapText="true" />
+                              <Label layoutX="598.0" layoutY="121.0" prefHeight="68.0" prefWidth="114.0" text="Inserisci il numero di animali domestici*:" wrapText="true" />
                               <TextField fx:id="animaliText4" layoutX="781.0" layoutY="142.0" prefHeight="25.0" prefWidth="68.0" />
                               <Label layoutX="670.0" layoutY="67.0" prefHeight="36.0" prefWidth="126.0" text="Inserisci il numero di ragazzi ospitabili*:" wrapText="true" />
                               <TextField fx:id="ospiti4" layoutX="822.0" layoutY="71.0" prefHeight="25.0" prefWidth="68.0" />

@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("gestioneGiteEAttivita.fxml")));
         primaryStage.setTitle("Vacanze studio");
         primaryStage.setScene(new Scene(root,891,745));
         primaryStage.show();
