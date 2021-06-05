@@ -17,12 +17,12 @@ import java.util.Objects;
 public class gestioneGiteEAttivita {
 
 
-    public gestioneGiteEAttivita() throws IOException {
+    public gestioneGiteEAttivita(Integer[] cod_col, Integer[] cod_fam) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("gestioneGiteEAttivita.fxml"));
         Parent root1 = fxmlLoader.load();
         //Get controller of scene2
         holderController hc = fxmlLoader.getController();
-        //Pass whatever data you want. You can have multiple method calls here
+        hc.transferMessageCod(cod_col, cod_fam);
         Stage stage = new Stage();
         stage.setResizable(true);
         stage.initModality(Modality.WINDOW_MODAL);
