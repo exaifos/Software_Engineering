@@ -46,13 +46,13 @@
                     <font>
                         <Font size="8.0" />
                     </font></Button>
-                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="638.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="638.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" visible="false">
                     <image>
                         <Image url="@worldmap.PNG" />
                     </image>
                 </ImageView>
                 <ChoiceBox id="ChoiceBoxCatalogo" fx:id="ChoiceBoxCatalogo" layoutX="732.0" layoutY="194.0" onMouseClicked="#Initialize" prefHeight="27.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: #393536; -fx-border-radius: 20px;" visible="false" AnchorPane.bottomAnchor="551.0" AnchorPane.leftAnchor="732.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="194.0" />
-                <Button fx:id="vac_eff" layoutX="40.0" layoutY="514.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Catalogo" textFill="#393536">
+                <Button fx:id="catalogoButton" layoutX="40.0" layoutY="514.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Catalogo" textFill="#393536">
                     <font>
                         <Font name="Tahoma" size="14.0" />
                     </font></Button>
@@ -196,126 +196,159 @@
                         <Font name="Tahoma" size="18.0" />
                     </font>
                 </Button>
-                <ScrollPane fx:id="vacanze_famiglia_info" layoutX="298.0" layoutY="243.0" prefHeight="453.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;" visible="false">
+                <ScrollPane fx:id="vacanze_famiglia_info" layoutX="298.0" layoutY="243.0" prefHeight="519.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;" visible="false">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1058.0" prefWidth="546.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
                             <children>
-                                <Label layoutX="14.0" layoutY="14.0" prefHeight="23.0" prefWidth="222.0" text="Informazioni sulla vacanza:" textFill="#c18446">
+                                <Label layoutX="11.0" layoutY="11.0" prefHeight="32.0" prefWidth="311.0" text="Informazioni sulla vacanza:" textFill="#c18446">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="25.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="cittàText" editable="false" layoutX="66.0" layoutY="40.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
+                                <TextField fx:id="cittàText" editable="false" layoutX="302.0" layoutY="43.0" prefHeight="17.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                                     <font>
-                                        <Font name="Tahoma" size="12.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font></TextField>
-                                <Label layoutX="14.0" layoutY="47.0" text="Città:">
+                                <Label layoutX="17.0" layoutY="51.0" text="Città:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="durataText" editable="false" layoutX="81.0" layoutY="70.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="77.0" text="Durata:">
+                                <TextField fx:id="durataText" editable="false" layoutX="302.0" layoutY="77.0" prefHeight="8.0" prefWidth="178.0" style="-fx-background-color: transparent; -fx-border-color: transaprent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="84.0" text="Durata:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="linguaText" editable="false" layoutX="81.0" layoutY="99.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="106.0" text="Lingua:">
+                                <TextField fx:id="linguaText" editable="false" layoutX="302.0" layoutY="110.0" prefHeight="9.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: transaprent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="117.0" text="Lingua:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="dataText" editable="false" layoutX="160.0" layoutY="127.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="134.0" text="Data di partenza:">
+                                <TextField fx:id="dataText" editable="false" layoutX="302.0" layoutY="142.0" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="150.0" text="Data di partenza:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="nomeFamigliaText" editable="false" layoutX="208.0" layoutY="190.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="197.0" text="Nome del capofamiglia:">
+                                <TextField fx:id="nomeFamigliaText" editable="false" layoutX="302.0" layoutY="234.0" prefHeight="39.0" prefWidth="196.0" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="241.0" text="Nome del capofamiglia:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="cognomeFamigliaText" editable="false" layoutX="237.0" layoutY="220.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="13.0" layoutY="226.0" text="Cognome del capofamiglia:">
+                                <TextField fx:id="cognomeFamigliaText" editable="false" layoutX="302.0" layoutY="269.0" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="276.0" text="Cognome del capofamiglia:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="14.0" layoutY="167.0" prefHeight="23.0" prefWidth="222.0" text="Informazioni sulla famiglia:" textFill="#c18446">
+                                <Label layoutX="11.0" layoutY="201.0" prefHeight="32.0" prefWidth="302.0" text="Informazioni sulla famiglia:" textFill="#c18446">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="25.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="componentiText" editable="false" layoutX="210.0" layoutY="249.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="256.0" text="Numero di componenti:">
+                                <TextField fx:id="componentiText" editable="false" layoutX="302.0" layoutY="304.0" prefHeight="24.0" prefWidth="169.0" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="311.0" text="Numero di componenti:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="camereText" editable="false" layoutX="176.0" layoutY="277.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="284.0" text="Numero di camere:">
+                                <TextField fx:id="camereText" editable="false" layoutX="302.0" layoutY="339.0" prefHeight="39.0" prefWidth="147.0" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="346.0" text="Numero di camere:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="bagniText" editable="false" layoutX="159.0" layoutY="306.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="13.0" layoutY="313.0" text="Numero di bagni:">
+                                <TextField fx:id="bagniText" editable="false" layoutX="302.0" layoutY="374.0" prefHeight="39.0" prefWidth="203.0" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="381.0" text="Numero di bagni:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="animaliText" editable="false" layoutX="170.0" layoutY="334.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="341.0" text="Numero di animali:">
+                                <TextField fx:id="animaliText" editable="false" layoutX="302.0" layoutY="409.0" prefHeight="17.0" prefWidth="241.0" style="-fx-background-color: transparent;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="416.0" text="Numero di animali:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="nomeAmicoText" layoutX="75.0" layoutY="451.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="458.0" text="Nome:">
+                                <TextField fx:id="nomeAmicoText" layoutX="302.0" layoutY="572.0" prefHeight="40.0" prefWidth="207.0" promptText="Nome" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="582.0" text="Nome:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="14.0" layoutY="375.0" prefHeight="23.0" prefWidth="222.0" text="Preferenze:" textFill="#c18446">
+                                <Label layoutX="11.0" layoutY="462.0" prefHeight="32.0" prefWidth="134.0" text="Preferenze:" textFill="#c18446">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="25.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="mailAmicoText" layoutX="135.0" layoutY="479.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                                <Label layoutX="14.0" layoutY="486.0" text="Indirizzo mail:">
+                                <TextField fx:id="mailAmicoText" layoutX="302.0" layoutY="615.0" prefHeight="40.0" prefWidth="209.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font></TextField>
+                                <Label layoutX="17.0" layoutY="625.0" text="Indirizzo mail:">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="testo_preferenze" layoutX="14.0" layoutY="400.0" prefHeight="52.0" prefWidth="478.0">
+                                <Label fx:id="testo_preferenze" layoutX="15.0" layoutY="506.0" prefHeight="52.0" prefWidth="517.0">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="284.0" layoutY="836.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
+                                <Button layoutX="273.0" layoutY="983.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
                                     <font>
                                         <Font name="Tahoma" size="14.0" />
                                     </font>
                                 </Button>
-                                <Button layoutX="108.0" layoutY="836.0" mnemonicParsing="false" onAction="#setTableVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
+                                <Button layoutX="97.0" layoutY="983.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
                                     <font>
                                         <Font name="Tahoma" size="14.0" />
                                     </font>
                                 </Button>
-                                <TableView fx:id="tabellaGite" layoutX="59.0" layoutY="578.0" prefHeight="207.0" prefWidth="392.0">
+                                <TableView fx:id="tabellaGite" layoutX="35.0" layoutY="731.0" prefHeight="207.0" prefWidth="447.0">
                                     <columns>
-                                        <TableColumn fx:id="colDestinazione" prefWidth="75.0" />
-                                        <TableColumn fx:id="colCosto" prefWidth="75.0" />
-                                        <TableColumn fx:id="colOre" prefWidth="75.0" />
-                                        <TableColumn fx:id="colDescrizione" prefWidth="166.0" />
+                                        <TableColumn fx:id="colDestinazione" prefWidth="94.0" />
+                                        <TableColumn fx:id="colDescrizione" prefWidth="244.0" />
+                                        <TableColumn fx:id="colOre" prefWidth="54.0" />
+                                        <TableColumn fx:id="colCosto" prefWidth="54.0" />
                                     </columns>
                                 </TableView>
-                                <Label layoutX="10.0" layoutY="526.0" prefHeight="23.0" prefWidth="115.0" text="Gite proposte:" textFill="#c18446">
+                                <Label layoutX="11.0" layoutY="678.0" prefHeight="32.0" prefWidth="170.0" text="Gite proposte:" textFill="#c18446">
                                     <font>
-                                        <Font name="Tahoma" size="18.0" />
+                                        <Font name="Tahoma" size="25.0" />
                                     </font>
                                 </Label>
                             </children>
@@ -327,127 +360,141 @@
                   <Font name="Tahoma" size="25.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="vacanze_college_info" layoutX="308.0" layoutY="253.0" prefHeight="453.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;" visible="false">
+            <ScrollPane fx:id="vacanze_college_info" layoutX="308.0" layoutY="253.0" prefHeight="519.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1058.0" prefWidth="546.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
                      <children>
-                        <Label layoutX="14.0" layoutY="14.0" prefHeight="23.0" prefWidth="222.0" text="Informazioni sulla vacanza:" textFill="#c18446">
+                        <Label layoutX="11.0" layoutY="11.0" prefHeight="32.0" prefWidth="311.0" text="Informazioni sulla vacanza:" textFill="#c18446">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cittàText1" editable="false" layoutX="66.0" layoutY="40.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
+                        <TextField fx:id="cittàTextCollege" editable="false" layoutX="232.0" layoutY="43.0" prefHeight="41.0" prefWidth="241.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                            <font>
-                              <Font name="Tahoma" size="12.0" />
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="14.0" layoutY="47.0" text="Città:">
+                        <Label layoutX="17.0" layoutY="51.0" text="Città:">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="durataText1" editable="false" layoutX="81.0" layoutY="70.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="77.0" text="Durata:">
+                        <TextField fx:id="durataTextCollege" editable="false" layoutX="232.0" layoutY="77.0" prefHeight="39.0" prefWidth="256.0" style="-fx-background-color: transparent; -fx-border-color: transaprent;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="84.0" text="Durata:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="linguaText1" editable="false" layoutX="81.0" layoutY="99.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="106.0" text="Lingua:">
+                        <TextField fx:id="linguaTextCollege" editable="false" layoutX="232.0" layoutY="110.0" prefHeight="39.0" prefWidth="238.0" style="-fx-background-color: transparent; -fx-border-color: transaprent;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="117.0" text="Lingua:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="dataText1" editable="false" layoutX="160.0" layoutY="127.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="134.0" text="Data di partenza:">
+                        <TextField fx:id="dataTextCollege" editable="false" layoutX="232.0" layoutY="142.0" prefHeight="41.0" prefWidth="261.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="150.0" text="Data di partenza:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nomeFamigliaText1" editable="false" layoutX="168.0" layoutY="190.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="197.0" text="Nome del college:">
+                        <TextField fx:id="nomeCollege" editable="false" layoutX="232.0" layoutY="234.0" prefHeight="39.0" prefWidth="262.0" style="-fx-background-color: transparent;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="241.0" text="Nome:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="cognomeFamigliaText1" editable="false" layoutX="188.0" layoutY="220.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="13.0" layoutY="226.0" text="Indirizzo del college:">
+                        <TextField fx:id="indirizzoCollege" editable="false" layoutX="232.0" layoutY="269.0" prefHeight="39.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="276.0" text="Indirizzo:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="167.0" prefHeight="23.0" prefWidth="222.0" text="Informazioni sul college:" textFill="#c18446">
+                        <Label layoutX="11.0" layoutY="201.0" prefHeight="32.0" prefWidth="302.0" text="Informazioni sul college:" textFill="#c18446">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="componentiText1" editable="false" layoutX="210.0" layoutY="249.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="256.0" text="Numero di componenti:">
+                        <TextField fx:id="componentiText1" editable="false" layoutX="232.0" layoutY="304.0" prefHeight="39.0" prefWidth="291.0" style="-fx-background-color: transparent;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="311.0" text="Attività:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="camereText1" editable="false" layoutX="176.0" layoutY="277.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="284.0" text="Numero di camere:">
+                        <TextField fx:id="nomeAmicoText1" layoutX="302.0" layoutY="572.0" prefHeight="40.0" prefWidth="207.0" promptText="Nome" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="582.0" text="Nome:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="bagniText1" editable="false" layoutX="159.0" layoutY="306.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="13.0" layoutY="313.0" text="Numero di bagni:">
+                        <Label layoutX="11.0" layoutY="462.0" prefHeight="32.0" prefWidth="134.0" text="Preferenze:" textFill="#c18446">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="animaliText1" editable="false" layoutX="170.0" layoutY="334.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="341.0" text="Numero di animali:">
+                        <TextField fx:id="mailAmicoText1" layoutX="302.0" layoutY="615.0" prefHeight="40.0" prefWidth="209.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="17.0" layoutY="625.0" text="Indirizzo mail:">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nomeAmicoText1" layoutX="75.0" layoutY="451.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="458.0" text="Nome:">
+                        <Label fx:id="testo_preferenze1" layoutX="15.0" layoutY="506.0" prefHeight="52.0" prefWidth="517.0">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="375.0" prefHeight="23.0" prefWidth="222.0" text="Preferenze:" textFill="#c18446">
-                           <font>
-                              <Font name="Tahoma" size="18.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="mailAmicoText1" layoutX="135.0" layoutY="479.0" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;" />
-                        <Label layoutX="14.0" layoutY="486.0" text="Indirizzo mail:">
-                           <font>
-                              <Font name="Tahoma" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="testo_preferenze1" layoutX="14.0" layoutY="400.0" prefHeight="52.0" prefWidth="478.0">
-                           <font>
-                              <Font name="Tahoma" size="18.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="284.0" layoutY="836.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
+                        <Button layoutX="273.0" layoutY="983.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
                            <font>
                               <Font name="Tahoma" size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="108.0" layoutY="836.0" mnemonicParsing="false" onAction="#setTableVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
+                        <Button layoutX="97.0" layoutY="983.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
                            <font>
                               <Font name="Tahoma" size="14.0" />
                            </font>
                         </Button>
-                        <TableView fx:id="tabellaGite1" layoutX="59.0" layoutY="578.0" prefHeight="207.0" prefWidth="392.0">
+                        <TableView fx:id="tabellaGite1" layoutX="35.0" layoutY="731.0" prefHeight="207.0" prefWidth="447.0">
                            <columns>
-                              <TableColumn fx:id="colDestinazione1" prefWidth="75.0" />
-                              <TableColumn fx:id="colCosto1" prefWidth="75.0" />
-                              <TableColumn fx:id="colOre1" prefWidth="75.0" />
-                              <TableColumn fx:id="colDescrizione1" prefWidth="166.0" />
+                              <TableColumn fx:id="colDestinazione1" prefWidth="94.0" />
+                              <TableColumn fx:id="colDescrizione1" prefWidth="244.0" />
+                              <TableColumn fx:id="colOre1" prefWidth="54.0" />
+                              <TableColumn fx:id="colCosto1" prefWidth="54.0" />
                            </columns>
                         </TableView>
-                        <Label layoutX="10.0" layoutY="526.0" prefHeight="23.0" prefWidth="115.0" text="Gite proposte:" textFill="#c18446">
+                        <Label layoutX="11.0" layoutY="678.0" prefHeight="32.0" prefWidth="170.0" text="Gite proposte:" textFill="#c18446">
                            <font>
-                              <Font name="Tahoma" size="18.0" />
+                              <Font name="Tahoma" size="25.0" />
                            </font>
                         </Label>
                      </children>

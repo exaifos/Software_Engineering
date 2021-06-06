@@ -7,6 +7,7 @@ package sample;
         nomeLogin.setFont(Font.font ("Tahoma", 18));
  */
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +38,7 @@ public class HomeController {
     @FXML
     private ChoiceBox<Object> ChoiceBoxCatalogo;
     private ObservableList<Vacanze> data;
+    private ObservableList<Gita> data_gita;
     @FXML
     private TableColumn<Vacanze, Integer> colDurata;
     @FXML
@@ -106,6 +108,7 @@ public class HomeController {
     // prenotazione
     public Label testo_preferenze;
     public ScrollPane vacanze_famiglia_info;
+    public ScrollPane vacanze_college_info;
     public TextField cittàText;
     public TextField durataText;
     public TextField linguaText;
@@ -118,12 +121,22 @@ public class HomeController {
     public TextField animaliText;
     public TextField nomeAmicoText;
     public TextField mailAmicoText;
+    public TextField cittàTextCollege;
+    public TextField durataTextCollege;
+    public TextField linguaTextCollege;
+    public TextField dataTextCollege;
+    public TextField nomeCollege;
+    public TextField indirizzoCollege;
+
+
 
     public void showProfile(ActionEvent mouseEvent) {
         // mostra il profilo
         testoScelta.setVisible(false);
         college.setVisible(false);
         famiglia.setVisible(false);
+        vacanze_college_info.setVisible(false);
+        vacanze_famiglia_info.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
         Scroll.setVisible(true);
@@ -350,6 +363,7 @@ public class HomeController {
         worldmap.setVisible(false);
         Scroll.setVisible(false);
         vacanze_famiglia_info.setVisible(false);
+        vacanze_college_info.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
         scelta = null;
@@ -371,6 +385,7 @@ public class HomeController {
         college.setVisible(false);
         famiglia.setVisible(false);
         worldmap.setVisible(false);
+        vacanze_college_info.setVisible(false);
         vacanze_famiglia_info.setVisible(false);
         Scroll.setVisible(false);
         //Font font = Font.loadFont("file:rsc/sample/Glegoo-Bold.ttf", 45);
@@ -471,11 +486,10 @@ public class HomeController {
                 String date = rs.getString("data_partenza");
                 Date dateValue = input.parse(date);
                 vacanze.DataPartenza.set(output.format(dateValue));
-                System.out.println("Durata: " + rs.getString("data_partenza"));
                 if (scelta == "vacanza_famiglia") {
                     vacanze.Famiglia.set(capitalize(rs.getString("cognome_capo_fam")));
                 }
-                // add cm inside of data
+                // add row inside of data
                 data.add(vacanze);
             }
         } catch (Exception e) {
@@ -504,7 +518,7 @@ public class HomeController {
             colFamiglia.setText("Famiglia");
             colFamiglia.setStyle("-fx-alignment: CENTER;");
         }
-        // set colum with buttons for each row
+        // set column with buttons for each row
         Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>> cellFactory
                 = //
                 new Callback<TableColumn<Vacanze, String>, TableCell<Vacanze, String>>() {
@@ -589,14 +603,17 @@ public class HomeController {
             TabellaVacanze.setVisible(false);
             famiglia.setVisible(false);
             college.setVisible(false);
-            System.out.println("CODICE SCELTA: " + codiceScelta);
-            String query = "SELECT num_camere, nome_capo_fam, cognome_capo_fam, num_componenti, num_bagni, num_animali FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
+            titolo.setText("DETTAGLI VACANZA:");
+            ChoiceBoxCatalogo.setVisible(false);
+            vacanze_college_info.setVisible(false);
+            String query = "SELECT num_camere, nome_capo_fam, cognome_capo_fam, num_componenti, num_bagni, num_animali, num_ospitabili FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
             ResultSet rs = databaseOperation.SQL_return(query);
             rs.next();
-            Integer num_camere = rs.getInt("num_camere");
-            if (num_camere >= 1) {
+            Integer num_ospitabili = rs.getInt("num_ospitabili");
+            System.out.println("Ospitabili: " + num_ospitabili);
+            if (num_ospitabili >= 1) {
                 vacanze_famiglia_info.setVisible(true);
-                testo_preferenze.setText("E' possibile specificare il nome e l'indirizzo mail di un amico\nche soggornerà nella stessa famiglia: ");
+                testo_preferenze.setText("E' possibile specificare il nome e l'indirizzo mail di\nun amico che soggornerà nella stessa famiglia: ");
                 cittàText.setText(capitalize(cittàScelta));
                 if (durataScelta > 1) {
                     durataText.setText(String.valueOf(durataScelta) + " settimane");
@@ -608,35 +625,80 @@ public class HomeController {
                 dataText.setText(dataPartenzaScelta);
                 nomeFamigliaText.setText(capitalize(rs.getString("nome_capo_fam")));
                 cognomeFamigliaText.setText(capitalize(rs.getString("cognome_capo_fam")));
-                componentiText.setText(rs.getString("num_componenti"));
-                camereText.setText(rs.getString("num_camere"));
-                bagniText.setText(rs.getString("num_bagni"));
+                if (Integer.parseInt(rs.getString("num_componenti")) == 1) {
+                    componentiText.setText(rs.getString("num_componenti") + " componente");
+                } else {
+                    componentiText.setText(rs.getString("num_componenti") + " componenti");
+                }
+                if (Integer.parseInt(rs.getString("num_camere")) == 1) {
+                    camereText.setText(rs.getString("num_camere") + " camera");
+                } else {
+                    camereText.setText(rs.getString("num_camere") + " camere");
+                }
+                if (Integer.parseInt(rs.getString("num_bagni")) == 1) {
+                    bagniText.setText(rs.getString("num_bagni") + " bagno");
+                } else {
+                    bagniText.setText(rs.getString("num_bagni") + " bagni");
+                }
                 if (Integer.parseInt(rs.getString("num_animali")) == 0) {
                     animaliText.setText("Nessun animale");
                 }
-                else {
-                    if (rs.getString("num_animali") == "1") {
-                        animaliText.setText(String.valueOf(rs.getString("num_animali")) + " animale");
-                    }
-                    else {
+                else if (Integer.parseInt(rs.getString("num_animali")) == 1) {
+                    animaliText.setText(String.valueOf(rs.getString("num_animali")) + " animale");
+                }
+                else if (Integer.parseInt(rs.getString("num_animali")) > 1) {
                         animaliText.setText(String.valueOf(rs.getString("num_animali") + " animali"));
-                    }
                 }
                 String nomeAmico = nomeAmicoText.getText();
                 String mailAmico = mailAmicoText.getText();
-                // gite
+
+                // view Gite
                 assert tabellaGite != null : "fx:id=\"tabellaGite\" was not injected: check your FXML file 'Home.fxml'.";
                 // setCellValueFactory for each column
                 colDestinazione.setCellValueFactory(new PropertyValueFactory<Gita,String>("Destinazione"));
                 colDestinazione.setText("Destinazione");
+                colDestinazione.setStyle("-fx-alignment: CENTER;");
                 colCosto.setCellValueFactory(new PropertyValueFactory<Gita,Integer>("Costo"));
                 colCosto.setText("Prezzo");
                 colCosto.setStyle("-fx-alignment: CENTER;");
                 colOre.setCellValueFactory(new PropertyValueFactory<Gita,Integer>("Ore"));
                 colOre.setText("Ore");
                 colOre.setStyle("-fx-alignment: CENTER;");
-                colDescrizione.setCellValueFactory(new PropertyValueFactory<Gita,String>("Descrizione"));
+                //colDescrizione.setCellValueFactory(new PropertyValueFactory<Gita,String>("Descrizione"));
                 colDescrizione.setText("Descrizione");
+                // setCellFactory for text wrapping
+                colDescrizione.setCellFactory(tc -> {
+                    colDescrizione.setCellValueFactory(new PropertyValueFactory<Gita,String>("Descrizione"));
+                    TableCell<Gita, String> cell = new TableCell<>();
+                    Text text = new Text();
+                    cell.setGraphic(text);
+                    cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+                    text.wrappingWidthProperty().bind(colDescrizione.widthProperty());
+                    text.textProperty().bind(cell.itemProperty());
+                    return cell ;
+                });
+                query = "SELECT * FROM gita, pianificazione_famiglia WHERE id_vacanza = " + codiceScelta + "AND id_gita = id;";
+                rs = databaseOperation.SQL_return(query);
+                // clear table
+                tabellaGite.getColumns().clear();
+                data_gita = FXCollections.observableArrayList();
+                // clear data
+                data_gita.clear();
+                while(rs.next()) {
+                    Gita gita = new Gita();
+                    gita.Costo.set(rs.getString("costo") + "€");
+                    System.out.println("Costo: " + rs.getInt("costo"));
+                    gita.Descrizione.set(rs.getString("descrizione"));
+                    gita.Destinazione.set(rs.getString("destinazione"));
+                    gita.Ore.set(rs.getInt("num_ore"));
+                    data_gita.add(gita);
+                }
+                tabellaGite.setItems(data_gita);
+                tabellaGite.getColumns().addAll(colDestinazione,colDescrizione,colOre,colCosto);
+
+                /*
+                TODO: save prenotazione and decrease num_ospitabili if button is pressed. Save nomeAmico and mailAmico if present.
+                 */
             }
             else {
                 Alert alertIncorrect = new Alert(Alert.AlertType.ERROR);
@@ -656,6 +718,23 @@ public class HomeController {
             TabellaVacanze.setVisible(false);
             famiglia.setVisible(false);
             college.setVisible(false);
+            titolo.setText("DETTAGLI VACANZA:");
+            ChoiceBoxCatalogo.setVisible(false);
+            String query = "SELECT città, lingua, nome_college, indirizzo_college, data_partenza, durata FROM vacanza_college WHERE codice = " + codiceScelta + ";";
+            ResultSet rs = databaseOperation.SQL_return(query);
+            rs.next();
+            cittàTextCollege.setText(capitalize(cittàScelta));
+            if (durataScelta > 1) {
+                durataTextCollege.setText(String.valueOf(durataScelta) + " settimane");
+            }
+            else {
+                durataTextCollege.setText(String.valueOf(durataScelta) + " settimana");
+            }
+            linguaTextCollege.setText(capitalize(linguaScelta));
+            dataTextCollege.setText(dataPartenzaScelta);
+            nomeCollege.setText(capitalize(rs.getString("nome_college")));
+            indirizzoCollege.setText(capitalize(rs.getString("indirizzo_college")));
+            vacanze_college_info.setVisible(true);
         }
         catch (Exception ex) {
             ex.printStackTrace();

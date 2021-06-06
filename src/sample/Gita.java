@@ -7,7 +7,7 @@ public class Gita {
 
         public SimpleStringProperty Destinazione = new SimpleStringProperty();
         public SimpleStringProperty Descrizione = new SimpleStringProperty();
-        public SimpleIntegerProperty Costo = new SimpleIntegerProperty();
+        public SimpleStringProperty Costo = new SimpleStringProperty();
         public SimpleIntegerProperty Ore = new SimpleIntegerProperty();
 
         public String getDestinazione() {
@@ -18,7 +18,7 @@ public class Gita {
             return Descrizione.get();
         }
 
-        public Integer getCosto() {
+        public String getCosto() {
             return Costo.get();
         }
 
