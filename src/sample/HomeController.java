@@ -106,6 +106,7 @@ public class HomeController {
     public ImageView worldmap;
     public String scelta;
     // prenotazione
+    public Integer num_ospitabili;
     public Label testo_preferenze;
     public ScrollPane vacanze_famiglia_info;
     public ScrollPane vacanze_college_info;
@@ -127,6 +128,15 @@ public class HomeController {
     public TextField dataTextCollege;
     public TextField nomeCollege;
     public TextField indirizzoCollege;
+    public ChoiceBox ChoicePagamento;
+    public ChoiceBox roomChoice;
+    public ObservableList<Object> paymentOptions = FXCollections.observableArrayList("Carta di credito", "Bonifico bancario");
+    public Object selectedPayment;
+    public Object selectedRoom;
+    public String nomeAmico;
+    public String mailAmico;
+    public Label testo_preferenze_college;
+    public ChoiceBox ChoicePagamentoCollege;
 
 
 
@@ -609,17 +619,17 @@ public class HomeController {
             String query = "SELECT num_camere, nome_capo_fam, cognome_capo_fam, num_componenti, num_bagni, num_animali, num_ospitabili FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
             ResultSet rs = databaseOperation.SQL_return(query);
             rs.next();
-            Integer num_ospitabili = rs.getInt("num_ospitabili");
+            num_ospitabili = rs.getInt("num_ospitabili");
             System.out.println("Ospitabili: " + num_ospitabili);
             if (num_ospitabili >= 1) {
                 vacanze_famiglia_info.setVisible(true);
                 testo_preferenze.setText("E' possibile specificare il nome e l'indirizzo mail di\nun amico che soggornerà nella stessa famiglia: ");
                 cittàText.setText(capitalize(cittàScelta));
                 if (durataScelta > 1) {
-                    durataText.setText(String.valueOf(durataScelta) + " settimane");
+                    durataText.setText(durataScelta + " settimane");
                 }
                 else {
-                    durataText.setText(String.valueOf(durataScelta) + " settimana");
+                    durataText.setText(durataScelta + " settimana");
                 }
                 linguaText.setText(capitalize(linguaScelta));
                 dataText.setText(dataPartenzaScelta);
@@ -644,13 +654,13 @@ public class HomeController {
                     animaliText.setText("Nessun animale");
                 }
                 else if (Integer.parseInt(rs.getString("num_animali")) == 1) {
-                    animaliText.setText(String.valueOf(rs.getString("num_animali")) + " animale");
+                    animaliText.setText(rs.getString("num_animali") + " animale");
                 }
                 else if (Integer.parseInt(rs.getString("num_animali")) > 1) {
-                        animaliText.setText(String.valueOf(rs.getString("num_animali") + " animali"));
+                        animaliText.setText(rs.getString("num_animali") + " animali");
                 }
-                String nomeAmico = nomeAmicoText.getText();
-                String mailAmico = mailAmicoText.getText();
+                nomeAmico = nomeAmicoText.getText();
+                mailAmico = mailAmicoText.getText();
 
                 // view Gite
                 assert tabellaGite != null : "fx:id=\"tabellaGite\" was not injected: check your FXML file 'Home.fxml'.";
@@ -695,21 +705,60 @@ public class HomeController {
                 }
                 tabellaGite.setItems(data_gita);
                 tabellaGite.getColumns().addAll(colDestinazione,colDescrizione,colOre,colCosto);
-
-                /*
-                TODO: save prenotazione and decrease num_ospitabili if button is pressed. Save nomeAmico and mailAmico if present.
-                 */
+                ObservableList<Object> paymentOptions = FXCollections.observableArrayList("Carta di credito", "Bonifico bancario");
+                ChoicePagamento.setItems(paymentOptions);
             }
             else {
                 Alert alertIncorrect = new Alert(Alert.AlertType.ERROR);
                 alertIncorrect.setHeaderText(null);
                 alertIncorrect.setContentText("Ci dispiace, non ci sono più posti disponibili in questa famiglia.");
                 alertIncorrect.showAndWait();
+                query = "SELECT codice, durata,data_partenza,città,lingua,cognome_capo_fam FROM " + scelta;
+                titolo.setText("CATALOGO");
+                ChoiceBoxCatalogo.setVisible(true);
+                // query result
+                rs = databaseOperation.Vacation_return(query,"");
+                // clear rows
+                TabellaVacanze.getItems().clear();
+                // clear columns
+                TabellaVacanze.getColumns().clear();
+                // put results inside of tableview
+                data = FillTableVacanze(rs);
+                // add data inside of tableview
+                TabellaVacanze.setItems(data);
+                TabellaVacanze.setVisible(true);
+                TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colFamiglia, colBottone);
             }
         }
         catch (Exception ex) {
             ex.printStackTrace();
             ResultSet result = null;
+        }
+    }
+
+    public void CreateBookingFamiglia(MouseEvent mouseEvent) throws SQLException {
+        try {
+            if (selectedPayment != null) {
+                String query = "SELECT * FROM ragazzo WHERE CF='" + CF + "';";
+                ResultSet rs = databaseOperation.SQL_return(query);
+                rs.next();
+                String cf = rs.getString("cf");
+                query = "INSERT INTO prenotazione_famiglia (\"CF_ragazzo\", codice_vacanza, nome_compagno, email_compagno) VALUES ('" + cf + "', '" + codiceScelta + "', '" + nomeAmico + "', '" + mailAmico + "');";
+                databaseOperation.SQL_insert(query);
+                //Integer new_ospitabili = num_ospitabili - 1;
+                query = "UPDATE vacanza_famiglia SET num_ospitabili='" + (num_ospitabili - 1) + "' WHERE codice='" + codiceScelta + "';";
+                databaseOperation.SQL_insert(query);
+                /*
+                TODO: creazione del pagamento
+                 */
+            } else {
+                Alert alertIncorrect = new Alert(Alert.AlertType.ERROR);
+                alertIncorrect.setHeaderText(null);
+                alertIncorrect.setContentText("Nessun metodo di pagamento selezionato.");
+                alertIncorrect.showAndWait();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -725,20 +774,77 @@ public class HomeController {
             rs.next();
             cittàTextCollege.setText(capitalize(cittàScelta));
             if (durataScelta > 1) {
-                durataTextCollege.setText(String.valueOf(durataScelta) + " settimane");
+                durataTextCollege.setText(durataScelta + " settimane");
             }
             else {
-                durataTextCollege.setText(String.valueOf(durataScelta) + " settimana");
+                durataTextCollege.setText(durataScelta + " settimana");
             }
             linguaTextCollege.setText(capitalize(linguaScelta));
             dataTextCollege.setText(dataPartenzaScelta);
             nomeCollege.setText(capitalize(rs.getString("nome_college")));
             indirizzoCollege.setText(capitalize(rs.getString("indirizzo_college")));
             vacanze_college_info.setVisible(true);
+            testo_preferenze_college.setText("E' possibile esprimere\nuna preferenza\nsul tipo di camera:");
+            ObservableList<Object> roomOptions = FXCollections.observableArrayList("Camera singola", "Camera condivisa");
+            roomChoice.setItems(roomOptions);
+            ChoicePagamentoCollege.setItems(paymentOptions);
         }
         catch (Exception ex) {
             ex.printStackTrace();
-            ResultSet result = null;
         }
+    }
+
+    public void InitializePagamento(MouseEvent mouseEvent) {
+        ChoicePagamento.setOnAction((event) -> {
+            selectedPayment = null;
+            selectedPayment = ChoicePagamento.getValue();
+        });
+    }
+
+    public void InitializeRoom(MouseEvent mouseEvent) {
+        roomChoice.setOnAction(((event) -> {
+            selectedRoom = null;
+            selectedRoom = roomChoice.getValue();
+        }));
+    }
+
+    public void CreateBookingCollege(MouseEvent mouseEvent) throws SQLException {
+        if (selectedPayment != null) {
+            if (selectedRoom != null) {
+                try {
+                    String query = "SELECT * FROM ragazzo WHERE CF='" + CF + "';";
+                    ResultSet rs = databaseOperation.SQL_return(query);
+                    rs.next();
+                    String cf = rs.getString("cf");
+                    String nomeCompagno = null;
+                    query = "INSERT INTO prenotazione_college (\"CF_ragazzo\", codice_vacanza, tipo_camera, nome_compagno) VALUES ('" + cf + "', '" + codiceScelta + "', '" + String.valueOf(selectedRoom) + "', '" + nomeCompagno + "');";
+                    databaseOperation.SQL_insert(query);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                /*
+                TODO: visualizzazione finestra di avvenuta prenotazione, creazione del pagamento
+                 */
+            }
+            else {
+                Alert alertIncorrect = new Alert(Alert.AlertType.ERROR);
+                alertIncorrect.setHeaderText(null);
+                alertIncorrect.setContentText("Non è stata impostata alcuna preferenza sulla camera");
+                alertIncorrect.showAndWait();
+            }
+        }
+        else {
+            Alert alertIncorrect = new Alert(Alert.AlertType.ERROR);
+            alertIncorrect.setHeaderText(null);
+            alertIncorrect.setContentText("Nessun metodo di pagamento selezionato.");
+            alertIncorrect.showAndWait();
+        }
+    }
+
+    public void InitializePagamentoCollege(MouseEvent mouseEvent) {
+        ChoicePagamentoCollege.setOnAction((event) -> {
+            selectedPayment = null;
+            selectedPayment = ChoicePagamentoCollege.getValue();
+        });
     }
 }

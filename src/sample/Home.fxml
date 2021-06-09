@@ -46,7 +46,7 @@
                     <font>
                         <Font size="8.0" />
                     </font></Button>
-                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="638.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="634.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@worldmap.PNG" />
                     </image>
@@ -196,9 +196,9 @@
                         <Font name="Tahoma" size="18.0" />
                     </font>
                 </Button>
-                <ScrollPane fx:id="vacanze_famiglia_info" layoutX="298.0" layoutY="243.0" prefHeight="519.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;" visible="false">
+                <ScrollPane fx:id="vacanze_famiglia_info" layoutX="298.0" layoutY="243.0" prefHeight="501.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;" visible="false">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1058.0" prefWidth="546.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1326.0" prefWidth="546.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
                             <children>
                                 <Label layoutX="11.0" layoutY="11.0" prefHeight="32.0" prefWidth="311.0" text="Informazioni sulla vacanza:" textFill="#c18446">
                                     <font>
@@ -328,12 +328,12 @@
                                         <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="273.0" layoutY="983.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
+                                <Button layoutX="273.0" layoutY="1074.0" mnemonicParsing="false" onMouseClicked="#CreateBookingFamiglia" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
                                     <font>
                                         <Font name="Tahoma" size="14.0" />
                                     </font>
                                 </Button>
-                                <Button layoutX="97.0" layoutY="983.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
+                                <Button layoutX="97.0" layoutY="1074.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
                                     <font>
                                         <Font name="Tahoma" size="14.0" />
                                     </font>
@@ -351,6 +351,12 @@
                                         <Font name="Tahoma" size="25.0" />
                                     </font>
                                 </Label>
+                        <ChoiceBox fx:id="ChoicePagamento" layoutX="259.0" layoutY="982.0" onMouseClicked="#InitializePagamento" prefWidth="150.0" />
+                        <Label layoutX="15.0" layoutY="982.0" text="Metodo di pagamento: ">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>
@@ -360,9 +366,9 @@
                   <Font name="Tahoma" size="25.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="vacanze_college_info" layoutX="308.0" layoutY="253.0" prefHeight="519.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
+            <ScrollPane fx:id="vacanze_college_info" layoutX="308.0" layoutY="253.0" prefHeight="501.0" prefWidth="563.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;" visible="false">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1058.0" prefWidth="546.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1283.0" prefWidth="546.0" style="-fx-border-color: f8f3f2; -fx-background-color: f8f3f2;">
                      <children>
                         <Label layoutX="11.0" layoutY="11.0" prefHeight="32.0" prefWidth="311.0" text="Informazioni sulla vacanza:" textFill="#c18446">
                            <font>
@@ -444,42 +450,22 @@
                               <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="nomeAmicoText1" layoutX="302.0" layoutY="572.0" prefHeight="40.0" prefWidth="207.0" promptText="Nome" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
-                           <font>
-                              <Font name="Tahoma" size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="17.0" layoutY="582.0" text="Nome:">
-                           <font>
-                              <Font name="Tahoma" size="20.0" />
-                           </font>
-                        </Label>
                         <Label layoutX="11.0" layoutY="462.0" prefHeight="32.0" prefWidth="134.0" text="Preferenze:" textFill="#c18446">
                            <font>
                               <Font name="Tahoma" size="25.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="mailAmicoText1" layoutX="302.0" layoutY="615.0" prefHeight="40.0" prefWidth="209.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: #000000; -fx-border-width: 0 0 1 0;">
-                           <font>
-                              <Font name="Tahoma" size="20.0" />
-                           </font>
-                        </TextField>
-                        <Label layoutX="17.0" layoutY="625.0" text="Indirizzo mail:">
+                        <Label fx:id="testo_preferenze_college" layoutX="15.0" layoutY="506.0" prefHeight="101.0" prefWidth="222.0">
                            <font>
                               <Font name="Tahoma" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="testo_preferenze1" layoutX="15.0" layoutY="506.0" prefHeight="52.0" prefWidth="517.0">
-                           <font>
-                              <Font name="Tahoma" size="20.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="273.0" layoutY="983.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
+                        <Button layoutX="273.0" layoutY="1092.0" mnemonicParsing="false" onMouseClicked="#CreateBookingCollege" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Prenota" textFill="#393536">
                            <font>
                               <Font name="Tahoma" size="14.0" />
                            </font>
                         </Button>
-                        <Button layoutX="97.0" layoutY="983.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
+                        <Button layoutX="97.0" layoutY="1092.0" mnemonicParsing="false" onAction="#setButtonVisible" prefHeight="30.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Torna al catalogo" textFill="#393536">
                            <font>
                               <Font name="Tahoma" size="14.0" />
                            </font>
@@ -497,6 +483,13 @@
                               <Font name="Tahoma" size="25.0" />
                            </font>
                         </Label>
+                        <ChoiceBox fx:id="ChoicePagamentoCollege" layoutX="288.0" layoutY="991.0" onMouseClicked="#InitializePagamentoCollege" prefWidth="150.0" />
+                        <Label layoutX="59.0" layoutY="991.0" text="Metodo di pagamento: ">
+                           <font>
+                              <Font name="Tahoma" size="20.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="roomChoice" layoutX="303.0" layoutY="544.0" onMouseClicked="#InitializeRoom" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </content>

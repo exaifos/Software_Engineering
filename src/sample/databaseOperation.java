@@ -53,14 +53,12 @@ public class databaseOperation {
             if (connection != null) {
                 System.out.println("Connected to database successfully.");
             }
-
             if (selectedItem == "Durata")
                 query = query + (" ORDER BY durata");
             else if (selectedItem == "Luogo")
                 query = query + (" ORDER BY città");
             else if (selectedItem == "Data di partenza")
                 query = query + (" ORDER BY data_partenza");
-
             System.out.println(query);
             selectStmt = connection.createStatement();
             result = selectStmt.executeQuery(query);
@@ -68,6 +66,10 @@ public class databaseOperation {
             ex.printStackTrace();
         }
         return result;
+    }
+
+    public static void Vacation_Insert() {
+
     }
 
     public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
