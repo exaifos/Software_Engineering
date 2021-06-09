@@ -546,6 +546,7 @@ public class HomeController {
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
+                                        codiceScelta = null;
                                         // get data from tableview row
                                         Vacanze vacanze = getTableView().getItems().get(getIndex());
                                         //TableRow row = getTableRow();
