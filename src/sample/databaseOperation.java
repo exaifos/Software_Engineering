@@ -13,6 +13,23 @@ public class databaseOperation {
     public static Statement insertStmt;
     public static ResultSet result;
 
+    public static boolean is_empty(String tabella) throws SQLException {
+        try {
+            String query="SELECT COUNT(*) FROM "+tabella + ";";
+            connection = DriverManager.getConnection(url, userName, password);
+            PreparedStatement statement = connection.prepareStatement(query);
+            result = statement.executeQuery();
+            result.next();
+            if (result.getString(1).equals("0"))
+                return false;
+            else
+                return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public static ResultSet SQL_return(String query) throws SQLException {
         // apertura connessione
         connection = null;

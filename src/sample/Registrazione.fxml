@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="891.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="745.0" prefWidth="891.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegistrationController">
 <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -72,7 +72,7 @@
                         <TextField id="cognomeGenText" fx:id="cognomeGenText" layoutX="232.0" layoutY="957.0" onAction="#handleRegistrationClick" prefHeight="26.0" prefWidth="205.0" />
                         <Label layoutX="22.0" layoutY="994.0" text="Inserisci la sua email*:" />
                         <TextField id="emailGenText" fx:id="emailGenText" layoutX="232.0" layoutY="990.0" onAction="#handleRegistrationClick" prefHeight="26.0" prefWidth="205.0" />
-                        <Label layoutX="22.0" layoutY="1028.0" text="Inserisci il numero di telefono di un genitore*:" />
+                        <Label layoutX="22.0" layoutY="1028.0" text="Inserisci il numero di telefono di un genitore*:" wrapText="true" />
                         <TextField id="telGenText" fx:id="telGenText" layoutX="232.0" layoutY="1024.0" onAction="#handleRegistrationClick" prefHeight="26.0" prefWidth="205.0" />
                         <Label layoutX="415.0" layoutY="171.0" text="Filtra per:" />
                          <TextField fx:id="filterText" layoutX="473.0" layoutY="166.0" onAction="#filterClick" prefHeight="26.0" prefWidth="54.0" />
@@ -90,7 +90,7 @@
                      <Image url="@cancel_24px.png" />
                  </image>
              </ImageView>
-             <Button fx:id="Exit" layoutX="855.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#handleExitClick" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="724.0" AnchorPane.leftAnchor="855.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="6.0">
+             <Button fx:id="Exit" layoutX="843.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#handleExitClick" prefHeight="35.0" prefWidth="40.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="705.0" AnchorPane.leftAnchor="843.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="6.0">
                  <font>
                      <Font size="8.0" />
                  </font></Button>

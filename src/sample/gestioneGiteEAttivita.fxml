@@ -34,7 +34,7 @@
                 <Image url="@next.png" />
             </image>
         </ImageView>
-        <Button fx:id="Avanti2" layoutX="836.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#gestioneAttivitaCollege" prefHeight="27.0" prefWidth="38.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="836.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="708.0">
+        <Button fx:id="Fine1" layoutX="836.0" layoutY="708.0" mnemonicParsing="false" onMouseClicked="#gestioneAttivitaCollege" prefHeight="27.0" prefWidth="38.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="836.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="708.0">
             <font>
                 <Font size="8.0" />
             </font></Button>
@@ -60,6 +60,16 @@
             <Font size="8.0" />
         </font>
     </Button>
+            <Button fx:id="nuovaAttivitaCollege" layoutX="820.0" layoutY="80.0" mnemonicParsing="false" onMouseClicked="#newActivity" prefHeight="27.0" prefWidth="28.0" style="-fx-background-color: transparent;" visible="false">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Button>
+            <Button fx:id="Fine2" layoutX="846.0" layoutY="718.0" visible="false" mnemonicParsing="false" onMouseClicked="#fineGestioneAttivitaCollege" prefHeight="27.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Button>
     </children>
     </AnchorPane>
     </children>
