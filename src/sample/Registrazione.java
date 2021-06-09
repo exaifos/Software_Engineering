@@ -13,7 +13,7 @@ public class Registrazione extends JFrame {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Registrazione.fxml"));
         Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.WINDOW_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Home");
         stage.setScene(new Scene(root1, 891,745));

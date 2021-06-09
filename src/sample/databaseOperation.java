@@ -5,13 +5,30 @@ import java.sql.*;
 
 public class databaseOperation {
 
-    private static Connection connection;
-    public static Statement selectStmt = null;
-    public static ResultSet result = null;
-    public static String url = "jdbc:postgresql://localhost:5432/vacanze_studio";
-    public static String userName = "sofia";
-    public static String password = "";
+    public static String url = "jdbc:postgresql://localhost:5432/postgres";
+    public static String userName = "postgres";
+    public static String password = "123Asdf?";
+    public static Connection connection;
+    public static Statement selectStmt;
     public static Statement insertStmt;
+    public static ResultSet result;
+
+    public static boolean is_empty(String tabella) throws SQLException {
+        try {
+            String query="SELECT COUNT(*) FROM "+tabella + ";";
+            connection = DriverManager.getConnection(url, userName, password);
+            PreparedStatement statement = connection.prepareStatement(query);
+            result = statement.executeQuery();
+            result.next();
+            if (result.getString(1).equals("0"))
+                return false;
+            else
+                return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 
     public static ResultSet SQL_return(String query) throws SQLException {
         // apertura connessione
@@ -25,7 +42,7 @@ public class databaseOperation {
             return result;
         } catch (Exception ex) {
             ex.printStackTrace();
-            result = null;
+            result=null;
             return result;
         }
     }
@@ -43,7 +60,7 @@ public class databaseOperation {
         }
     }
 
-    public static ResultSet Vacation_return(String query, Object selectedItem) {
+    public static ResultSet Vacation_return (String query, Object selectedItem) {
         connection = null;
         selectStmt = null;
         result = null;
@@ -53,12 +70,14 @@ public class databaseOperation {
             if (connection != null) {
                 System.out.println("Connected to database successfully.");
             }
+
             if (selectedItem == "Durata")
                 query = query + (" ORDER BY durata");
             else if (selectedItem == "Luogo")
                 query = query + (" ORDER BY città");
             else if (selectedItem == "Data di partenza")
                 query = query + (" ORDER BY data_partenza");
+
             System.out.println(query);
             selectStmt = connection.createStatement();
             result = selectStmt.executeQuery(query);
@@ -68,11 +87,7 @@ public class databaseOperation {
         return result;
     }
 
-    public static void Vacation_Insert() {
-
-    }
-
-    public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
+     public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
 
         // apertura connessione
         connection = null;
@@ -84,7 +99,7 @@ public class databaseOperation {
             }
 
             selectStmt = connection.createStatement();
-            String query = "SELECT DISTINCT " + attributo + " FROM " + nome_tabella + ";";
+            String query="SELECT DISTINCT " + attributo + " FROM " +nome_tabella + ";";
             ResultSet rs = selectStmt.executeQuery(query);
 
             while (rs.next()) {
@@ -95,7 +110,8 @@ public class databaseOperation {
                 }
 
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
@@ -107,6 +123,5 @@ public class databaseOperation {
             }
         }
         return false;
-
     }
 }
