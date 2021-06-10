@@ -84,37 +84,36 @@
                               </Button>
                            </children>
                         </Pane>
-                        <Pane fx:id="pannello1" layoutX="6.0" layoutY="311.0" prefHeight="185.0" prefWidth="923.0" visible="false">
+                        <Pane fx:id="pannello1" layoutX="6.0" layoutY="285.0" prefHeight="185.0" prefWidth="923.0" visible="false">
                            <children>
                               <Label layoutY="18.0" text="1) Inserisci il nome del College*:" />
                               <TextField fx:id="college1" layoutX="191.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
-                              <Label layoutX="440.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
-                              <TextField fx:id="indirizzo1" layoutX="629.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
-                              <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Label layoutX="400.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
+                              <TextField fx:id="indirizzo1" layoutX="590.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
                            </children>
                         </Pane>
                         <Pane fx:id="pannello2" layoutX="6.0" layoutY="327.0" prefHeight="52.0" prefWidth="923.0" visible="false">
                            <children>
                               <Label layoutY="18.0" text="2) Inserisci il nome del College*:" />
                               <TextField fx:id="college2" layoutX="192.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
-                              <Label layoutX="440.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
-                              <TextField fx:id="indirizzo2" layoutX="629.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="400.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
+                              <TextField fx:id="indirizzo2" layoutX="590.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
                            </children>
                         </Pane>
                         <Pane fx:id="pannello3" layoutX="7.0" layoutY="369.0" prefHeight="52.0" prefWidth="923.0" visible="false">
                            <children>
                               <Label layoutY="18.0" text="3) Inserisci il nome del College*:" />
                               <TextField fx:id="college3" layoutX="191.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
-                              <Label layoutX="440.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
-                              <TextField fx:id="indirizzo3" layoutX="629.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="400.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
+                              <TextField fx:id="indirizzo3" layoutX="590.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
                            </children>
                         </Pane>
                         <Pane fx:id="pannello4" layoutX="7.0" layoutY="412.0" prefHeight="52.0" prefWidth="923.0" visible="false">
                            <children>
                               <Label layoutY="18.0" text="4) Inserisci il nome del College*:" />
                               <TextField fx:id="college4" layoutX="191.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
-                              <Label layoutX="440.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
-                              <TextField fx:id="indirizzo4" layoutX="629.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="400.0" layoutY="18.0" text="Inserisci l'indirizzo del College*:" />
+                              <TextField fx:id="indirizzo4" layoutX="590.0" layoutY="14.0" prefHeight="25.0" prefWidth="174.0" />
                            </children>
                         </Pane>
                         <Separator layoutX="14.0" layoutY="212.0" prefHeight="0.0" prefWidth="807.0" />
