@@ -72,7 +72,6 @@
                         <TextField id="cognomeGenText" fx:id="cognomeGenText" layoutX="232.0" layoutY="957.0" onAction="#handleRegistrationClick" prefHeight="26.0" prefWidth="205.0" />
                         <Label layoutX="22.0" layoutY="994.0" text="Inserisci la sua email*:" />
                         <TextField id="emailGenText" fx:id="emailGenText" layoutX="232.0" layoutY="990.0" onAction="#handleRegistrationClick" prefHeight="26.0" prefWidth="205.0" />
-                         <Label layoutX="22.0" layoutY="1028.0" text="Inserisci il numero di telefono di un genitore*:" wrapText="true" />
                          <Label layoutX="22.0" layoutY="1028.0" prefHeight="35.0" prefWidth="154.0" text="Inserisci il numero di telefono di un genitore*:" wrapText="true" />
                         <TextField id="telGenText" fx:id="telGenText" layoutX="232.0" layoutY="1024.0" onAction="#handleRegistrationClick" prefHeight="26.0" prefWidth="205.0" />
                         <Label layoutX="415.0" layoutY="171.0" text="Filtra per:" />

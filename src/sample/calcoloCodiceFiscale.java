@@ -234,7 +234,7 @@ public class calcoloCodiceFiscale {
             CF=CF + cognome_cons.charAt(0) + cognome_cons.charAt(1) + cognome_cons.charAt(2);
         }
         else if (l_cognome==2 || cognome_voc.length()>=2) {
-            CF=CF + cognome_cons.charAt(0) + cognome_cons.charAt(2) + cognome_voc.charAt(0);
+            CF=CF + cognome_cons.charAt(0) + cognome_cons.charAt(1) + cognome_voc.charAt(0);
         }
         else if (l_cognome==1 || cognome_voc.length()>=2) {
             CF=CF + cognome_cons.charAt(0) + cognome_voc.charAt(0) + cognome_voc.charAt(1);
@@ -247,7 +247,10 @@ public class calcoloCodiceFiscale {
         if (l_nome>=4) {
             CF=CF + nome_cons.charAt(0) + nome_cons.charAt(2) + nome_cons.charAt(3);
         }
-        else if (l_nome==3  || l_nome==2|| nome_voc.length()>=2) {
+        else if (l_nome==3) {
+            CF=CF + nome_cons.charAt(0) + nome_cons.charAt(1) + nome_cons.charAt(2);
+        }
+        else if (l_nome==2|| nome_voc.length()>=2) {
             CF=CF + nome_cons.charAt(0) + nome_cons.charAt(1) + nome_voc.charAt(0);
         }
         else if (l_nome==1 || nome_voc.length()>=2) {
