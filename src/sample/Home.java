@@ -76,6 +76,5 @@ public class Home {
         stage.setScene(scene);
         stage.setScene(scene);
         stage.show();
-
     }
 }

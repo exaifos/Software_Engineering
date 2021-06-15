@@ -5,9 +5,9 @@ import java.sql.*;
 
 public class databaseOperation {
 
-    public static String url = "jdbc:postgresql://localhost:5432/postgres";
-    public static String userName = "postgres";
-    public static String password = "123Asdf?";
+    public static String url = "jdbc:postgresql://localhost:5432/vacanze_studio";
+    public static String userName = "sofia";
+    public static String password = "";
     public static Connection connection;
     public static Statement selectStmt;
     public static Statement insertStmt;
