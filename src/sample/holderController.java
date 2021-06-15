@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -97,8 +96,6 @@ public class holderController {
     public Button nuovaAttivitaCollege;
     public Button Fine1;
     public Button Fine2;
-    public Pane pan;
-    public Pane panPrincipale;
 
 
     public void handleExitClick(MouseEvent mouseEvent) {
@@ -107,96 +104,13 @@ public class holderController {
     }
 
     public void visualizeNewVacation(ActionEvent actionEvent) {
-        panPrincipale.getChildren().clear();
         worldmap.setVisible(false);
         scroll.setVisible(true);
-        pan.setVisible(true);
-        scroll.setContent(pan);
         titolo.setText("Gestione Nuove Vacanze");
+
     }
 
-    String precedente;
     public void visualizeVotes(ActionEvent actionEvent) {
-        int x=23;
-        int y=14;
-        int h_panelVotes=20;
-        panPrincipale.getChildren().clear();
-        worldmap.setVisible(false);
-        scroll.setVisible(true);
-        pan.setVisible(false);
-        titolo.setText("Gestione Questionari");
-        String query="(SELECT VC.nome_college as soggetto, VC.città as citta, Q.voto, Q.commento FROM questionario_college Q JOIN vacanza_college VC ON Q.codice_vacanza_college=VC.codice) UNION (SELECT 'famiglia ' || VF.cognome_capo_fam as soggetto, VF.città as città, Q.voto, Q.commento FROM questionario_famiglia Q JOIN vacanza_famiglia VF ON Q.codice_vacanza_famiglia=VF.codice);\n";
-        try {
-            ResultSet rs=databaseOperation.SQL_return(query);
-            while (rs.next()) {
-                String nc=rs.getString(1);
-                String cit=rs.getString(2);
-                String voto=rs.getString(3);
-                String comm=rs.getString(4);
-
-                if (!nc.equals(precedente)) {
-                    Label college = new Label();
-                    college.setText(nc + " - " + cit);
-                    college.setLayoutX(x);
-                    college.setLayoutY(y);
-                /* <Label layoutX="23.0" layoutY="14.0" prefHeight="21.0" prefWidth="312.0" text="UNIVERSITA' DI BARCELLONA" textFill="#755620">
-                           <font>
-                              <Font name="Book Antiqua" size="16.0" />
-                           </font>
-                        </Label>*/
-                    college.prefWidth(412);
-                    college.prefHeight(21);
-                    college.setFont(new Font("Book Antiqua", 16));
-                    college.setStyle("-fx-text-fill:#755620;");
-                    panPrincipale.getChildren().add(college);
-                }
-                Label votoL=new Label();
-                votoL.setText("Voto: " + voto);
-                votoL.setLayoutX(x);
-                votoL.setLayoutY(y+30);
-                if (comm!=null) {
-                    Label q = new Label();
-                    q.setText("Commento libero:");
-                    q.setLayoutX(x);
-                    q.setLayoutY(y+50);
-                    TextArea que=new TextArea();
-                    que.setEditable(false);
-                    que.setText(comm);
-                    que.setLayoutX(x+100);
-                    que.setLayoutY(y+50);
-                    que.setPrefHeight(40);
-                    que.setPrefHeight(150);
-                    y=y+200;
-                    h_panelVotes=h_panelVotes+200;
-                    panPrincipale.setLayoutY(300.0);
-                    panPrincipale.getChildren().addAll(votoL, q, que);
-                    panPrincipale.setPrefHeight(h_panelVotes);
-                    panPrincipale.setPrefWidth(400);
-
-                    scroll.setContent(panPrincipale);
-
-                }
-                else {
-                    y=y+80;
-                    h_panelVotes=h_panelVotes+80;
-                    panPrincipale.setLayoutY(34.0);
-                    panPrincipale.getChildren().addAll(votoL);
-                    panPrincipale.setPrefHeight(h_panelVotes);
-                    panPrincipale.setPrefWidth(400);
-
-                    scroll.setContent(panPrincipale);
-                }
-                precedente=nc;
-            }
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-            alertMissing.setHeaderText(null);
-            alertMissing.setContentText("Impossibile collegarsi al database");
-            alertMissing.showAndWait();
-        }
     }
 
 

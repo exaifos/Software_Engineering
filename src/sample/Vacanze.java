@@ -13,7 +13,6 @@ public class Vacanze {
     public SimpleStringProperty Lingua = new SimpleStringProperty();
     public SimpleIntegerProperty Durata = new SimpleIntegerProperty();
     public SimpleIntegerProperty Codice = new SimpleIntegerProperty();
-    public SimpleStringProperty Effettuata = new SimpleStringProperty();
 
     public Integer getDurata() {
         return Durata.get();
@@ -34,12 +33,7 @@ public class Vacanze {
     public Integer getCodice() {
         return Codice.get();
     }
-
     public String getFamiglia() {
         return Famiglia.get();
-    }
-
-    public String getEffettuata() {
-        return Effettuata.get();
     }
 }

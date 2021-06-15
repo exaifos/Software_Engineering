@@ -110,12 +110,6 @@ public class RegistrationController {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
     }
-
-    static boolean isValidNumber(String number) {
-        String regexStr = "^[0-9]{10}$";
-        return number.matches(regexStr);
-    }
-
     public void handleRegistrationClick(ActionEvent actionEvent) {
 
     }
@@ -175,13 +169,6 @@ public class RegistrationController {
                 alertMissing.showAndWait();
                 c=false;
             }
-            else if ((tel!=null && !isValidNumber(tel)) || !isValidNumber(telGen)) {
-                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-                alertMissing.setHeaderText(null);
-                alertMissing.setContentText("Ricontrollare i numeri di telefono!");
-                alertMissing.showAndWait();
-                c=false;
-            }
             else if (today.isBefore(dataNText.getValue()) || today.isEqual(dataNText.getValue())) {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
                 alertMissing.setHeaderText(null);
@@ -215,8 +202,6 @@ public class RegistrationController {
             databaseOperation.SQL_insert(query2);
             databaseOperation.SQL_insert(query3);
             try {
-                Stage stage = (Stage) Exit.getScene().getWindow();
-                stage.close();
                 new Home(cf, user);
             } catch (Exception e) {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
