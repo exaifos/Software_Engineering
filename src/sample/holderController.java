@@ -111,11 +111,19 @@ public class holderController {
         worldmap.setVisible(false);
         scroll.setVisible(true);
         pan.setVisible(true);
+<<<<<<< HEAD
+=======
+        pan.setPrefHeight(1256);
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
         scroll.setContent(pan);
         titolo.setText("Gestione Nuove Vacanze");
     }
 
+<<<<<<< HEAD
     String precedente;
+=======
+    String precedente="";
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
     public void visualizeVotes(ActionEvent actionEvent) {
         int x=23;
         int y=14;
@@ -125,25 +133,40 @@ public class holderController {
         scroll.setVisible(true);
         pan.setVisible(false);
         titolo.setText("Gestione Questionari");
+<<<<<<< HEAD
         String query="(SELECT VC.nome_college as soggetto, VC.città as citta, Q.voto, Q.commento FROM questionario_college Q JOIN vacanza_college VC ON Q.codice_vacanza_college=VC.codice) UNION (SELECT 'famiglia ' || VF.cognome_capo_fam as soggetto, VF.città as città, Q.voto, Q.commento FROM questionario_famiglia Q JOIN vacanza_famiglia VF ON Q.codice_vacanza_famiglia=VF.codice);\n";
         try {
             ResultSet rs=databaseOperation.SQL_return(query);
+=======
+        String query="(SELECT VC.nome_college as soggetto, VC.città as citta, Q.voto, Q.commento FROM questionario_college Q JOIN vacanza_college VC ON Q.codice_vacanza_college=VC.codice) UNION (SELECT 'famiglia ' || VF.cognome_capo_fam as soggetto, VF.città as città, Q.voto, Q.commento FROM questionario_famiglia Q JOIN vacanza_famiglia VF ON Q.codice_vacanza_famiglia=VF.codice)ORDER BY soggetto;\n";
+        try {
+            ResultSet rs=databaseOperation.SQL_return(query);
+            int contatore=0;
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
             while (rs.next()) {
                 String nc=rs.getString(1);
                 String cit=rs.getString(2);
                 String voto=rs.getString(3);
                 String comm=rs.getString(4);
+<<<<<<< HEAD
 
+=======
+                contatore++;
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
                 if (!nc.equals(precedente)) {
                     Label college = new Label();
                     college.setText(nc + " - " + cit);
                     college.setLayoutX(x);
                     college.setLayoutY(y);
+<<<<<<< HEAD
                 /* <Label layoutX="23.0" layoutY="14.0" prefHeight="21.0" prefWidth="312.0" text="UNIVERSITA' DI BARCELLONA" textFill="#755620">
                            <font>
                               <Font name="Book Antiqua" size="16.0" />
                            </font>
                         </Label>*/
+=======
+
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
                     college.prefWidth(412);
                     college.prefHeight(21);
                     college.setFont(new Font("Book Antiqua", 16));
@@ -174,11 +197,18 @@ public class holderController {
                     panPrincipale.setPrefWidth(400);
 
                     scroll.setContent(panPrincipale);
+<<<<<<< HEAD
 
                 }
                 else {
                     y=y+80;
                     h_panelVotes=h_panelVotes+80;
+=======
+                }
+                else {
+                    y=y+50;
+                    h_panelVotes=h_panelVotes+50;
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
                     panPrincipale.setLayoutY(34.0);
                     panPrincipale.getChildren().addAll(votoL);
                     panPrincipale.setPrefHeight(h_panelVotes);
@@ -188,6 +218,22 @@ public class holderController {
                 }
                 precedente=nc;
             }
+<<<<<<< HEAD
+=======
+            if (contatore==0) {
+                System.out.println("Nessun questionario presente!");
+                Label no_quest=new Label();
+                no_quest.setLayoutX(200);
+                no_quest.setLayoutY(247);
+                no_quest.setText("Nessun questionario è stato ancora compilato");
+                panPrincipale.setLayoutY(300.0);
+                panPrincipale.getChildren().addAll(no_quest);
+                panPrincipale.setPrefHeight(20);
+                panPrincipale.setPrefWidth(400);
+
+                scroll.setContent(panPrincipale);
+            }
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
 
         }
         catch (Exception e) {
@@ -206,8 +252,72 @@ public class holderController {
         utente = message2;
     }
 
+    public int index=1;
+    public void newCollegeVacation(ActionEvent actionEvent) {
+        if (pannello5.isVisible() && (nomeFamText1.getText() == null || nomeFamText1.getText().trim().isEmpty() || ospiti1.getText() == null || ospiti1.getText().trim().isEmpty() || cognomeText1.getText() == null || cognomeText1.getText().trim().isEmpty() || compText1.getText() == null || compText1.getText().trim().isEmpty() || dispText1.getText() == null || dispText1.getText().trim().isEmpty() || distText1.getText() == null || distText1.getText().trim().isEmpty() || bagniText1.getText() == null || bagniText1.getText().trim().isEmpty() || animaliText1.getText() == null || animaliText1.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 1");
+            alertMissing.showAndWait();
+        } else if (pannello6.isVisible() && (nomeFamText2.getText() == null || nomeFamText2.getText().trim().isEmpty() || ospiti2.getText() == null || ospiti2.getText().trim().isEmpty() || cognomeText2.getText() == null || cognomeText2.getText().trim().isEmpty() || compText2.getText() == null || compText2.getText().trim().isEmpty() || dispText2.getText() == null || dispText2.getText().trim().isEmpty() || distText2.getText() == null || distText2.getText().trim().isEmpty() || bagniText2.getText() == null || bagniText2.getText().trim().isEmpty() || animaliText2.getText() == null || animaliText2.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 2");
+            alertMissing.showAndWait();
+        } else if (pannello7.isVisible() && (nomeFamText3.getText() == null || nomeFamText3.getText().trim().isEmpty() || ospiti3.getText() == null || ospiti3.getText().trim().isEmpty() || cognomeText3.getText() == null || cognomeText3.getText().trim().isEmpty() || compText3.getText() == null || compText3.getText().trim().isEmpty() || dispText3.getText() == null || dispText3.getText().trim().isEmpty() || distText3.getText() == null || distText3.getText().trim().isEmpty() || bagniText3.getText() == null || bagniText3.getText().trim().isEmpty() || animaliText3.getText() == null || animaliText3.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 3");
+            alertMissing.showAndWait();
+        } else if (pannello8.isVisible() && (nomeFamText4.getText() == null || nomeFamText4.getText().trim().isEmpty() || ospiti4.getText() == null || ospiti4.getText().trim().isEmpty() || cognomeText4.getText() == null || cognomeText4.getText().trim().isEmpty() || compText4.getText() == null || compText4.getText().trim().isEmpty() || dispText4.getText() == null || dispText4.getText().trim().isEmpty() || distText4.getText() == null || distText4.getText().trim().isEmpty() || bagniText4.getText() == null || bagniText4.getText().trim().isEmpty() || animaliText4.getText() == null || animaliText4.getText().trim().isEmpty())) {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 4");
+            alertMissing.showAndWait();
+        } else if (index == 1) {
+            pannello1.setVisible(true);
+            System.out.println("PANNELLO 1");
+            index++;
+        } else if (index == 2) {
+            if (college1.getText() == null || college1.getText().trim().isEmpty() || indirizzo1.getText() == null || indirizzo1.getText().trim().isEmpty()) {
+                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+                alertMissing.setHeaderText(null);
+                alertMissing.setContentText("Riempire prima i dati del primo college");
+                alertMissing.showAndWait();
+            } else {
+                pannello2.setVisible(true);
+                index++;
+            }
+        } else if (index == 3) {
+            if (college2.getText() == null || college2.getText().trim().isEmpty() || indirizzo2.getText() == null || indirizzo2.getText().trim().isEmpty()) {
+                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+                alertMissing.setHeaderText(null);
+                alertMissing.setContentText("Riempire prima i dati del secondo college");
+                alertMissing.showAndWait();
+            } else {
+                pannello3.setVisible(true);
+                index++;
+            }
+        } else if (index == 4) {
+            if (college3.getText() == null || college3.getText().trim().isEmpty() || indirizzo3.getText() == null || indirizzo3.getText().trim().isEmpty()) {
+                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+                alertMissing.setHeaderText(null);
+                alertMissing.setContentText("Riempire prima i dati del terzo college");
+                alertMissing.showAndWait();
+            } else {
+                pannello4.setVisible(true);
+                index++;
+            }
+        } else {
+            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
+            alertMissing.setHeaderText(null);
+            alertMissing.setContentText("Non si possono aggiungere più di 4 vacanze in un college");
+            alertMissing.showAndWait();
+            index++;
+        }
+    }
 
-    private int index2 = 1;
+    public int index2 = 1;
 
     public void newFamilyVacation(ActionEvent actionEvent) {
         if (pannello1.isVisible() && (college1.getText() == null || college1.getText().trim().isEmpty() || indirizzo1.getText() == null || indirizzo1.getText().trim().isEmpty())) {
@@ -284,71 +394,6 @@ public class holderController {
             alertMissing.setContentText("Non si possono aggiungere più di 4 vacanze in famiglia");
             alertMissing.showAndWait();
             index2++;
-        }
-    }
-
-    private int index = 1;
-
-    public void newCollegeVacation(ActionEvent actionEvent) {
-        if (pannello5.isVisible() && (nomeFamText1.getText() == null || nomeFamText1.getText().trim().isEmpty() || ospiti1.getText() == null || ospiti1.getText().trim().isEmpty() || cognomeText1.getText() == null || cognomeText1.getText().trim().isEmpty() || compText1.getText() == null || compText1.getText().trim().isEmpty() || dispText1.getText() == null || dispText1.getText().trim().isEmpty() || distText1.getText() == null || distText1.getText().trim().isEmpty() || bagniText1.getText() == null || bagniText1.getText().trim().isEmpty() || animaliText1.getText() == null || animaliText1.getText().trim().isEmpty())) {
-            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-            alertMissing.setHeaderText(null);
-            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 1");
-            alertMissing.showAndWait();
-        } else if (pannello6.isVisible() && (nomeFamText2.getText() == null || nomeFamText2.getText().trim().isEmpty() || ospiti2.getText() == null || ospiti2.getText().trim().isEmpty() || cognomeText2.getText() == null || cognomeText2.getText().trim().isEmpty() || compText2.getText() == null || compText2.getText().trim().isEmpty() || dispText2.getText() == null || dispText2.getText().trim().isEmpty() || distText2.getText() == null || distText2.getText().trim().isEmpty() || bagniText2.getText() == null || bagniText2.getText().trim().isEmpty() || animaliText2.getText() == null || animaliText2.getText().trim().isEmpty())) {
-            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-            alertMissing.setHeaderText(null);
-            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 2");
-            alertMissing.showAndWait();
-        } else if (pannello7.isVisible() && (nomeFamText3.getText() == null || nomeFamText3.getText().trim().isEmpty() || ospiti3.getText() == null || ospiti3.getText().trim().isEmpty() || cognomeText3.getText() == null || cognomeText3.getText().trim().isEmpty() || compText3.getText() == null || compText3.getText().trim().isEmpty() || dispText3.getText() == null || dispText3.getText().trim().isEmpty() || distText3.getText() == null || distText3.getText().trim().isEmpty() || bagniText3.getText() == null || bagniText3.getText().trim().isEmpty() || animaliText3.getText() == null || animaliText3.getText().trim().isEmpty())) {
-            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-            alertMissing.setHeaderText(null);
-            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 3");
-            alertMissing.showAndWait();
-        } else if (pannello8.isVisible() && (nomeFamText4.getText() == null || nomeFamText4.getText().trim().isEmpty() || ospiti4.getText() == null || ospiti4.getText().trim().isEmpty() || cognomeText4.getText() == null || cognomeText4.getText().trim().isEmpty() || compText4.getText() == null || compText4.getText().trim().isEmpty() || dispText4.getText() == null || dispText4.getText().trim().isEmpty() || distText4.getText() == null || distText4.getText().trim().isEmpty() || bagniText4.getText() == null || bagniText4.getText().trim().isEmpty() || animaliText4.getText() == null || animaliText4.getText().trim().isEmpty())) {
-            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-            alertMissing.setHeaderText(null);
-            alertMissing.setContentText("Riempire prima i dati relativi alla famiglia numero 4");
-            alertMissing.showAndWait();
-        } else if (index == 1) {
-            pannello1.setVisible(true);
-            index++;
-        } else if (index == 2) {
-            if (college1.getText() == null || college1.getText().trim().isEmpty() || indirizzo1.getText() == null || indirizzo1.getText().trim().isEmpty()) {
-                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-                alertMissing.setHeaderText(null);
-                alertMissing.setContentText("Riempire prima i dati del primo college");
-                alertMissing.showAndWait();
-            } else {
-                pannello2.setVisible(true);
-                index++;
-            }
-        } else if (index == 3) {
-            if (college2.getText() == null || college2.getText().trim().isEmpty() || indirizzo2.getText() == null || indirizzo2.getText().trim().isEmpty()) {
-                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-                alertMissing.setHeaderText(null);
-                alertMissing.setContentText("Riempire prima i dati del secondo college");
-                alertMissing.showAndWait();
-            } else {
-                pannello3.setVisible(true);
-                index++;
-            }
-        } else if (index == 4) {
-            if (college3.getText() == null || college3.getText().trim().isEmpty() || indirizzo3.getText() == null || indirizzo3.getText().trim().isEmpty()) {
-                Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-                alertMissing.setHeaderText(null);
-                alertMissing.setContentText("Riempire prima i dati del terzo college");
-                alertMissing.showAndWait();
-            } else {
-                pannello4.setVisible(true);
-                index++;
-            }
-        } else {
-            Alert alertMissing = new Alert(Alert.AlertType.ERROR);
-            alertMissing.setHeaderText(null);
-            alertMissing.setContentText("Non si possono aggiungere più di 4 vacanze in un college");
-            alertMissing.showAndWait();
-            index++;
         }
     }
 

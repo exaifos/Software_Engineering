@@ -55,7 +55,13 @@
             </ImageView>
             <ScrollPane fx:id="scroll" layoutX="240.0" layoutY="249.0" prefHeight="492.0" prefWidth="651.0" visible="false">
                <content>
+<<<<<<< HEAD
                   <Pane fx:id="panPrincipale" prefHeight="1250.0" prefWidth="895.0">
+=======
+                  <Pane fx:id="panPrincipale" prefHeight="1256.0" prefWidth="895.0">
+                  <children>
+                  <Pane fx:id="pan" prefHeight="227.0" prefWidth="923.0" visible="false">
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
                      <children>
                         <Pane fx:id="pan" prefHeight="227.0" prefWidth="923.0" visible="false">
                            <children>
@@ -198,11 +204,14 @@
                               <TextField fx:id="ospiti4" layoutX="822.0" layoutY="71.0" prefHeight="25.0" prefWidth="68.0" />
                            </children>
                         </Pane>
+<<<<<<< HEAD
                         <Button fx:id="Save" layoutX="502.0" layoutY="153.0" mnemonicParsing="false" onAction="#SaveVacations" prefHeight="36.0" prefWidth="169.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Salva le modifiche" textAlignment="CENTER" textFill="#393536" textOverrun="CLIP" visible="false" wrapText="true">
                            <font>
                               <Font name="Tahoma" size="14.0" />
                            </font>
                         </Button>
+=======
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
                         <Pane fx:id="pannello11" layoutX="16.0" layoutY="295.0" prefHeight="52.0" prefWidth="923.0" visible="false">
                            <children>
                               <Label layoutY="18.0" text="1) Inserisci il nome del College*:" />
@@ -232,7 +241,17 @@
                               <TextField fx:id="ospiti41" layoutX="822.0" layoutY="71.0" prefHeight="25.0" prefWidth="68.0" />
                            </children>
                         </Pane>
+<<<<<<< HEAD
+=======
+                              <Button fx:id="Save" layoutX="467.0" layoutY="153.0" mnemonicParsing="false" onAction="#SaveVacations" prefHeight="36.0" prefWidth="147.0" style="-fx-background-color: trasnparent; -fx-border-color: #393536; -fx-border-radius: 20px;" text="Salva Modifiche" textAlignment="CENTER" textFill="#393536" textOverrun="CLIP" visible="false" wrapText="true">
+                                 <font>
+                                    <Font name="Tahoma" size="14.0" />
+                                 </font>
+                              </Button>
+>>>>>>> c273bf8b14acb75c7aa655b159d6f685d84ec6d4
                      </children>
+                  </Pane>
+                  </children>
                   </Pane>
                </content>
             </ScrollPane>
