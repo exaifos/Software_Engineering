@@ -15,7 +15,7 @@ public class databaseOperation {
 
     public static boolean is_empty(String tabella) throws SQLException {
         try {
-            String query="SELECT COUNT(*) FROM "+tabella + ";";
+            String query = "SELECT COUNT(*) FROM " + tabella + ";";
             connection = DriverManager.getConnection(url, userName, password);
             PreparedStatement statement = connection.prepareStatement(query);
             result = statement.executeQuery();
@@ -42,7 +42,7 @@ public class databaseOperation {
             return result;
         } catch (Exception ex) {
             ex.printStackTrace();
-            result=null;
+            result = null;
             return result;
         }
     }
@@ -60,7 +60,7 @@ public class databaseOperation {
         }
     }
 
-    public static ResultSet Vacation_return (String query, Object selectedItem) {
+    public static ResultSet Vacation_return(String query, Object selectedItem) {
         connection = null;
         selectStmt = null;
         result = null;
@@ -87,7 +87,7 @@ public class databaseOperation {
         return result;
     }
 
-     public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
+    public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
 
         // apertura connessione
         connection = null;
@@ -99,7 +99,7 @@ public class databaseOperation {
             }
 
             selectStmt = connection.createStatement();
-            String query="SELECT DISTINCT " + attributo + " FROM " +nome_tabella + ";";
+            String query = "SELECT DISTINCT " + attributo + " FROM " + nome_tabella + ";";
             ResultSet rs = selectStmt.executeQuery(query);
 
             while (rs.next()) {
@@ -110,8 +110,7 @@ public class databaseOperation {
                 }
 
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
