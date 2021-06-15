@@ -11,10 +11,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import javax.swing.text.html.ListView;
 import java.io.IOException;
-import java.sql.SQLException;
 
 
 public class Home {
@@ -29,7 +30,7 @@ public class Home {
 
     @FXML
     public Text nomeLogin;
-    public Home(String CF, String nome_user) throws IOException, SQLException {
+    public Home(String CF, String nome_user) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home.fxml"));
         Parent root1 = fxmlLoader.load();
 
@@ -73,7 +74,7 @@ public class Home {
         Scene scene = new Scene(root1,891,745);
         scene.getStylesheets().add(getClass().getResource("tableempty.css").toExternalForm());
         stage.setScene(scene);
+        stage.setScene(scene);
         stage.show();
-
     }
 }
