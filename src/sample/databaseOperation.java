@@ -87,7 +87,7 @@ public class databaseOperation {
         return result;
     }
 
-     public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
+    public static boolean Ricerca(String attributo, String cercami, String nome_tabella) {
 
         // apertura connessione
         connection = null;
