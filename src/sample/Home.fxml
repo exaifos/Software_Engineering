@@ -788,7 +788,7 @@
                                         <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </Label>
-                                <ChoiceBox fx:id="VotoQuestionarioFamiglia" layoutX="371.0" layoutY="354.0" onMouseClicked="#InitializeTipoVacanzaView" prefHeight="25.0" prefWidth="121.0" />
+                                <ChoiceBox fx:id="VotoQuestionarioFamiglia" layoutX="371.0" layoutY="354.0" onMouseClicked="#InitializeVoto" prefHeight="25.0" prefWidth="121.0" />
                                 <Label layoutX="17.0" layoutY="392.0" text="Commento:">
                                     <font>
                                         <Font name="Tahoma" size="20.0" />
@@ -830,7 +830,7 @@
                         <Font name="Tahoma" size="30.0" />
                     </font>
                 </Text>
-                <ChoiceBox fx:id="ChoiceTipoVisualizzazione" layoutX="582.0" layoutY="248.0" onMouseClicked="#InitializeTipoVacanzaView" prefHeight="25.0" prefWidth="121.0" visible="false" />
+                <ChoiceBox fx:id="ChoiceTipoVisualizzazione" layoutX="613.0" layoutY="249.0" onMouseClicked="#InitializeTipoVacanzaView" prefHeight="25.0" prefWidth="121.0" visible="false" />
                 <Label fx:id="TestoFiltro" layoutX="299.0" layoutY="245.0" prefHeight="32.0" prefWidth="310.0" text="Filtra per tipo di vacanza:" textFill="#000000" visible="false">
                     <font>
                         <Font name="Tahoma" size="25.0" />
@@ -850,6 +850,12 @@
                         <TableColumn fx:id="colBottoneVacanza" editable="false" prefWidth="75.0" sortable="false" />
                     </columns>
                 </TableView>
+            <Label fx:id="TestoFiltro2" layoutX="299.0" layoutY="277.0" prefHeight="32.0" prefWidth="310.0" text="Filtra per destinazione:" textFill="#000000" visible="false">
+               <font>
+                  <Font name="Tahoma" size="25.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="ChoiceDestinazione" layoutX="613.0" layoutY="281.0" onMouseClicked="#InitializeDestinazione" prefHeight="25.0" prefWidth="121.0" visible="false" />
             </children>
         </AnchorPane>
     </children>

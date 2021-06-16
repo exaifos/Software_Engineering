@@ -215,6 +215,7 @@ public class HomeController {
     public Button TornaCatalogoFamiglia;
     public Button TornaCatalogoCollege;
     public Label TestoFiltro;
+    public Label TestoFiltro2;
     public TableView TabellaVacanzeView;
     public TableColumn colCittàVacanze;
     public TableColumn colLinguaVacanze;
@@ -225,7 +226,10 @@ public class HomeController {
     public TableColumn<Vacanze, String> colBottoneVacanza;
     public ObservableList<Vacanze> dataViewVacanza;
     public ChoiceBox ChoiceTipoVisualizzazione;
-
+    public ChoiceBox ChoiceDestinazione;
+    Object selectedViewType;
+    Object selectedDestinazione;
+    ObservableList<Object> destinazioni = FXCollections.observableArrayList();
 
     public void showProfile(ActionEvent mouseEvent) {
         // mostra il profilo
@@ -246,7 +250,9 @@ public class HomeController {
         titoloQuestionari.setVisible(false);
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         titolo.setVisible(true);
         Scroll.setVisible(true);
         titolo.setText("AREA RISERVATA");
@@ -481,7 +487,9 @@ public class HomeController {
         titoloQuestionari.setVisible(false);
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         scelta = null;
         famiglia.setVisible(true);
         college.setVisible(true);
@@ -514,7 +522,9 @@ public class HomeController {
         titoloQuestionari.setVisible(false);
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         ChoiceBoxCatalogo.setVisible(true);
         ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata", "Città", "Data di partenza");
         // view choicebox options
@@ -638,6 +648,21 @@ public class HomeController {
                     ChoicePagamento.setItems(paymentOptions);
                     compagno = true;
                 }
+                else {
+                    query = "SELECT codice, durata,data_partenza,città,lingua,cognome_capo_fam FROM " + scelta;
+                    try {
+                        // query result
+                        rs = databaseOperation.Vacation_return(query, "");
+                        // put results inside of tableview
+                        data = FillTableVacanze(rs);
+                        // add data inside of tableview
+                        TabellaVacanze.setItems(data);
+                        TabellaVacanze.setVisible(true);
+                        TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colFamiglia, colBottone);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             } catch (Exception ex) {
                 System.out.println(ex);
             }
@@ -651,11 +676,7 @@ public class HomeController {
                 // add data inside of tableview
                 TabellaVacanze.setItems(data);
                 TabellaVacanze.setVisible(true);
-                if (scelta == "vacanza_famiglia") {
-                    TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colFamiglia, colBottone);
-                } else {
-                    TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colBottone);
-                }
+                TabellaVacanze.getColumns().addAll(colCittà, colData, colLingua, colDurata, colBottone);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1391,7 +1412,9 @@ public class HomeController {
             titoloQuestionari.setVisible(false);
             TabellaVacanzeView.setVisible(false);
             ChoiceTipoVisualizzazione.setVisible(false);
+            ChoiceDestinazione.setVisible(false);
             TestoFiltro.setVisible(false);
+            TestoFiltro2.setVisible(false);
             titolo.setText("PAGAMENTI:");
             titolo.setVisible(true);
             TabellaPagamenti.setVisible(true);
@@ -1485,7 +1508,9 @@ public class HomeController {
             titoloQuestionari.setVisible(false);
             TabellaVacanzeView.setVisible(false);
             ChoiceTipoVisualizzazione.setVisible(false);
+            ChoiceDestinazione.setVisible(false);
             TestoFiltro.setVisible(false);
+            TestoFiltro2.setVisible(false);
             titolo.setText("CERTIFICATI:");
             titolo.setVisible(true);
             colNomeLivello.setCellValueFactory(new PropertyValueFactory<Level, String>("NomeLivello"));
@@ -1576,7 +1601,9 @@ public class HomeController {
         TabellaCertificati.setVisible(false);
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         titolo.setText("QUESTIONARI DA COMPILARE:");
         titoloQuestionari.setVisible(true);
         titolo.setVisible(true);
@@ -1748,7 +1775,12 @@ public class HomeController {
                 questionario.DataQuestionario.set(output.format(rs_vacanza.getDate("data_partenza")));
                 questionario.TipoQuestionario.set(capitalize(tipo_vacanza));
                 questionario.VotoQuestionario.set(rs.getInt("voto"));
-                questionario.CommentoQuestionario.set(rs.getString("commento"));
+                if (rs.getString("commento").equals("<null>")) {
+                    questionario.CommentoQuestionario.set("Nessun commento");
+                }
+                else {
+                    questionario.CommentoQuestionario.set(rs.getString("commento"));
+                }
                 data_questionario.add(questionario);
             }
         } catch (Exception ex) {
@@ -1760,6 +1792,8 @@ public class HomeController {
     private void CompilaQuestionario(String cittàQuestionario, String dataQuestionario) throws SQLException {
         TabellaQuestionari.setVisible(false);
         ObservableList<Object> voto = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+        TabellaQuestionariCompilati.setVisible(false);
+        titoloQuestionari.setVisible(false);
         try {
             if (TipoQuestionario.equals("Famiglia")) {
                 VotoQuestionarioFamiglia.setItems(voto);
@@ -1856,18 +1890,21 @@ public class HomeController {
     }
 
     public void InitializeVoto(MouseEvent mouseEvent) {
-        if (TipoQuestionario.equals("College")) {
+        System.out.println("TIPO: " + TipoQuestionario);
+        //if (TipoQuestionario == ("College")) {
             VotoQuestionarioCollege.setOnAction((event) -> {
+                System.out.println("Questionario College, sono nell'if");
                 selectedGrade = null;
                 selectedGrade = VotoQuestionarioCollege.getValue();
             });
-        }
-        else if (TipoQuestionario.equals("Famiglia")) {
+        //}
+        //else if (TipoQuestionario == ("Famiglia")) {
             VotoQuestionarioFamiglia.setOnAction((event) -> {
+                System.out.println("Questionario Famiglia, sono nell'if");
                 selectedGrade = null;
                 selectedGrade = VotoQuestionarioFamiglia.getValue();
             });
-        }
+        //}
     }
 
     public void showVacations(ActionEvent actionEvent) throws SQLException {
@@ -1888,7 +1925,9 @@ public class HomeController {
         TabellaCertificati.setVisible(false);
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         titoloQuestionari.setVisible(false);
         TabellaQuestionari.setVisible(false);
         TabellaQuestionariCompilati.setVisible(false);
@@ -2012,7 +2051,9 @@ public class HomeController {
         PrenotaCollege.setVisible(false);
         TornaCatalogoCollege.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         metodoPagamentoCollege.setVisible(false);
         titolo.setText("DETTAGLI VACANZA:");
         TabellaVacanzeView.setVisible(false);
@@ -2152,7 +2193,9 @@ public class HomeController {
         PrenotaFamiglia.setVisible(false);
         TornaCatalogoFamiglia.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
+        ChoiceDestinazione.setVisible(false);
         TestoFiltro.setVisible(false);
+        TestoFiltro2.setVisible(false);
         metodoPagamentoFamiglia.setVisible(false);
         titolo.setText("DETTAGLI VACANZA:");
         TabellaVacanzeView.setVisible(false);
@@ -2253,7 +2296,7 @@ public class HomeController {
 
     }
 
-    private void showVacations2(Object selectedViewType) {
+    private void showVacations2(Object destinazione) {
         // clear columns
         TabellaVacanzeView.getColumns().clear();
         dataViewVacanza = FXCollections.observableArrayList();
@@ -2261,14 +2304,32 @@ public class HomeController {
         dataViewVacanza.clear();
         TableColumnsViewVacations(selectedViewType);
         System.out.println(selectedViewType);
+        ChoiceDestinazione.setVisible(true);
         String query;
+        destinazioni.clear();
         if (selectedViewType == "Famiglia") {
             query = "SELECT vacanza_famiglia.codice, vacanza_famiglia.durata, vacanza_famiglia.data_partenza, vacanza_famiglia.città, vacanza_famiglia.lingua, vacanza_famiglia.cognome_capo_fam FROM vacanza_famiglia, prenotazione_famiglia WHERE vacanza_famiglia.codice = prenotazione_famiglia.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "';";
         } else {
             query = "SELECT vacanza_college.codice, vacanza_college.durata, vacanza_college.data_partenza, vacanza_college.città, vacanza_college.lingua FROM vacanza_college, prenotazione_college WHERE vacanza_college.codice = prenotazione_college.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "';";
         }
+            try {
+                // query result
+                ResultSet rs = databaseOperation.SQL_return(query);
+                while (rs.next()) {
+                    destinazioni.add(rs.getString("città"));
+                }
+                ChoiceDestinazione.setVisible(true);
+                TestoFiltro2.setVisible(true);
+                ChoiceDestinazione.setItems(destinazioni);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        if (selectedViewType == "Famiglia") {
+            query = "SELECT vacanza_famiglia.codice, vacanza_famiglia.durata, vacanza_famiglia.data_partenza, vacanza_famiglia.città, vacanza_famiglia.lingua, vacanza_famiglia.cognome_capo_fam FROM vacanza_famiglia, prenotazione_famiglia WHERE vacanza_famiglia.codice = prenotazione_famiglia.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "'" + destinazione + ";";
+        } else {
+            query = "SELECT vacanza_college.codice, vacanza_college.durata, vacanza_college.data_partenza, vacanza_college.città, vacanza_college.lingua FROM vacanza_college, prenotazione_college WHERE vacanza_college.codice = prenotazione_college.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "'" +  destinazione + ";";
+        }
         try {
-            // query result
             ResultSet rs = databaseOperation.SQL_return(query);
             // put results inside of tableview
             dataViewVacanza = FillTableViewVacanze(rs,selectedViewType);
@@ -2287,14 +2348,27 @@ public class HomeController {
 
     public void InitializeTipoVacanzaView(MouseEvent mouseEvent) throws Exception {
         ChoiceTipoVisualizzazione.setOnAction((event) -> {
-            Object selectedViewType = ChoiceTipoVisualizzazione.getValue();
+            selectedViewType = ChoiceTipoVisualizzazione.getValue();
             if (selectedViewType != null) {
                 try {
-                    showVacations2(selectedViewType);
+                    showVacations2("");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
+    }
+
+    public void InitializeDestinazione(MouseEvent mouseEvent) throws SQLException {
+            ChoiceDestinazione.setOnAction((event) -> {
+                selectedDestinazione = ChoiceDestinazione.getValue();
+                if (selectedDestinazione != null) {
+                    try {
+                        showVacations2("AND città = '" + selectedDestinazione + "'");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
     }
 }
