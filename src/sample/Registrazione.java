@@ -69,8 +69,7 @@ public class Registrazione extends JFrame {
         String pass2 = "";
         //System.out.println("user: " + user + "\tpassword: " + pass + "\tpassword2: " + pass2);
         // controllo che il nome utente non sia già in uso
-        RicercaContenuto rc = new RicercaContenuto();
-        boolean controllo = rc.Ricerca("login", user, "ragazzo");
+        boolean controllo = databaseOperation.Ricerca("login", user, "ragazzo");
         if (controllo == true) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);

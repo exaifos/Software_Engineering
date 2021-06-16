@@ -189,7 +189,7 @@ public class RegistrationController {
                 alertMissing.showAndWait();
                 c=false;
             }
-            else if (RicercaContenuto.Ricerca("login", user,"ragazzo")) {
+            else if (databaseOperation.Ricerca("login", user,"ragazzo")) {
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
                 alertMissing.setHeaderText(null);
                 alertMissing.setContentText("User già presente!");
