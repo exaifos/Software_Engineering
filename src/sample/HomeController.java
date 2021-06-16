@@ -133,7 +133,6 @@ public class HomeController {
     public TextField indirizzoCollege;
     public ChoiceBox ChoicePagamento;
     public ChoiceBox roomChoice;
-    public Text filtra;
     public ObservableList<Object> paymentOptions;
     public Object selectedPayment;
     public Object selectedRoom;
@@ -204,6 +203,8 @@ public class HomeController {
     public TextField cognomeFamigliaQuestionario;
     public TextField commentoQuestionarioFamiglia;
     public ChoiceBox VotoQuestionarioFamiglia;
+    public Label metodoPagamentoFamiglia;
+    public Label metodoPagamentoCollege;
     // visualizzazione vacanze
     public Label TipoCameraCollege;
     public TextField TipoCameraCollegeText;
@@ -214,7 +215,6 @@ public class HomeController {
     public Button TornaCatalogoFamiglia;
     public Button TornaCatalogoCollege;
     public Label TestoFiltro;
-    public Label TestoVacanze;
     public TableView TabellaVacanzeView;
     public TableColumn colCittàVacanze;
     public TableColumn colLinguaVacanze;
@@ -237,7 +237,6 @@ public class HomeController {
         TabellaVacanze.setVisible(false);
         TabellaPagamenti.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
-        filtra.setVisible(false);
         confirmation.setVisible(false);
         TabellaQuestionari.setVisible(false);
         TabellaCertificati.setVisible(false);
@@ -248,7 +247,7 @@ public class HomeController {
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
+        titolo.setVisible(true);
         Scroll.setVisible(true);
         titolo.setText("AREA RISERVATA");
         try {
@@ -474,7 +473,6 @@ public class HomeController {
         TabellaPagamenti.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
-        filtra.setVisible(false);
         confirmation.setVisible(false);
         TabellaCertificati.setVisible(false);
         InfoQuestionarioCollege.setVisible(false);
@@ -484,11 +482,11 @@ public class HomeController {
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
         scelta = null;
         famiglia.setVisible(true);
         college.setVisible(true);
         titolo.setText("PRENOTAZIONE");
+        titolo.setVisible(true);
         famiglia.setOnAction(event -> {
             scelta = "vacanza_famiglia";
         });
@@ -517,8 +515,6 @@ public class HomeController {
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
-        filtra.setVisible(true);
         ChoiceBoxCatalogo.setVisible(true);
         ObservableList<Object> viewOptions = FXCollections.observableArrayList("Durata", "Città", "Data di partenza");
         // view choicebox options
@@ -545,7 +541,6 @@ public class HomeController {
                     titolo.setText("DETTAGLI VACANZA:");
                     famiglia.setVisible(false);
                     college.setVisible(false);
-                    filtra.setVisible(false);
                     ChoiceBoxCatalogo.setVisible(false);
                     codiceScelta = rs.getInt("codice_vacanza");
                     String query_vacanza = "SELECT * from vacanza_famiglia WHERE codice = '" + codiceScelta + "';";
@@ -822,7 +817,6 @@ public class HomeController {
         ChoiceBoxCatalogo.setVisible(true);
         // handle choicebox selection on mouse click
         ChoiceBoxCatalogo.setOnAction((event) -> {
-            filtra.setVisible(true);
             Object selectedItem = ChoiceBoxCatalogo.getValue();
             try {
                 buildData(selectedItem);
@@ -950,7 +944,7 @@ public class HomeController {
                 alertIncorrect.showAndWait();
                 query = "SELECT codice, durata,data_partenza,città,lingua,cognome_capo_fam FROM " + scelta;
                 titolo.setText("CATALOGO");
-                filtra.setVisible(true);
+                titolo.setVisible(true);
                 ChoiceBoxCatalogo.setVisible(true);
                 // query result
                 rs = databaseOperation.Vacation_return(query, "");
@@ -974,6 +968,7 @@ public class HomeController {
     public void BookingFamigliaDetails(MouseEvent mouseEvent) throws SQLException {
         try {
             if (selectedPayment != null) {
+                PrenotaFamiglia.setVisible(true);
                 if (nomeAmicoText.getText().trim().isEmpty()) {
                     if (mailAmicoText.getText().trim().isEmpty()) {
                         nomeAmico = null;
@@ -1074,6 +1069,7 @@ public class HomeController {
 
                 }
                 // pagamento
+                metodoPagamentoFamiglia.setVisible(true);
                 query = "INSERT INTO pagamento_famiglia (\"CF_ragazzo\", codice_vacanza_famiglia, \"tipo_pagamento \") VALUES ('" + cf + "', '" + codiceScelta + "', '" + selectedPayment + "');";
                 databaseOperation.SQL_insert(query);
                 Alert alertIncorrect = new Alert(Alert.AlertType.INFORMATION);
@@ -1093,9 +1089,12 @@ public class HomeController {
             TabellaVacanze.setVisible(false);
             famiglia.setVisible(false);
             college.setVisible(false);
+            titolo.setVisible(true);
             titolo.setText("DETTAGLI VACANZA:");
             ChoiceBoxCatalogo.setVisible(false);
-            filtra.setVisible(false);
+            PrenotaCollege.setVisible(true);
+            metodoPagamentoCollege.setVisible(true);
+            testo_preferenze_college.setVisible(true);
             String query = "SELECT città, lingua, nome_college, indirizzo_college, data_partenza, durata FROM vacanza_college WHERE codice = " + codiceScelta + ";";
             ResultSet rs = databaseOperation.SQL_return(query);
             rs.next();
@@ -1109,8 +1108,15 @@ public class HomeController {
             dataTextCollege.setText(dataPartenzaScelta);
             nomeCollege.setText(capitalize(rs.getString("nome_college")));
             indirizzoCollege.setText(capitalize(rs.getString("indirizzo_college")));
+            TipoCameraCollegeText.setVisible(false);
+            TipoCameraCollege.setVisible(false);
+            NomeCompagnoCollege.setVisible(false);
+            NomeCompagnoCollegeText.setVisible(false);
             vacanze_college_info.setVisible(true);
             vacanze_college_info.setVvalue(vacanze_college_info.getVmin());
+            roomChoice.setVisible(true);
+            ChoicePagamentoCollege.setVisible(true);
+            TornaCatalogoCollege.setVisible(true);
             // view attività
             assert tabellaAttività != null : "fx:id=\"tabellaAttività\" was not injected: check your FXML file 'Home.fxml'.";
             // setCellValueFactory for each column
@@ -1376,7 +1382,6 @@ public class HomeController {
             vacanze_famiglia_info.setVisible(false);
             TabellaVacanze.setVisible(false);
             ChoiceBoxCatalogo.setVisible(false);
-            filtra.setVisible(false);
             confirmation.setVisible(false);
             Scroll.setVisible(false);
             TabellaCertificati.setVisible(false);
@@ -1387,7 +1392,6 @@ public class HomeController {
             TabellaVacanzeView.setVisible(false);
             ChoiceTipoVisualizzazione.setVisible(false);
             TestoFiltro.setVisible(false);
-            TestoVacanze.setVisible(false);
             titolo.setText("PAGAMENTI:");
             titolo.setVisible(true);
             TabellaPagamenti.setVisible(true);
@@ -1472,7 +1476,6 @@ public class HomeController {
             vacanze_famiglia_info.setVisible(false);
             TabellaVacanze.setVisible(false);
             ChoiceBoxCatalogo.setVisible(false);
-            filtra.setVisible(false);
             confirmation.setVisible(false);
             Scroll.setVisible(false);
             InfoQuestionarioCollege.setVisible(false);
@@ -1483,7 +1486,6 @@ public class HomeController {
             TabellaVacanzeView.setVisible(false);
             ChoiceTipoVisualizzazione.setVisible(false);
             TestoFiltro.setVisible(false);
-            TestoVacanze.setVisible(false);
             titolo.setText("CERTIFICATI:");
             titolo.setVisible(true);
             colNomeLivello.setCellValueFactory(new PropertyValueFactory<Level, String>("NomeLivello"));
@@ -1566,7 +1568,6 @@ public class HomeController {
         vacanze_famiglia_info.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
-        filtra.setVisible(false);
         confirmation.setVisible(false);
         Scroll.setVisible(false);
         InfoQuestionarioCollege.setVisible(false);
@@ -1576,7 +1577,6 @@ public class HomeController {
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
         titolo.setText("QUESTIONARI DA COMPILARE:");
         titoloQuestionari.setVisible(true);
         titolo.setVisible(true);
@@ -1879,9 +1879,9 @@ public class HomeController {
         vacanze_famiglia_info.setVisible(false);
         TabellaVacanze.setVisible(false);
         ChoiceBoxCatalogo.setVisible(false);
-        filtra.setVisible(false);
         confirmation.setVisible(false);
         Scroll.setVisible(false);
+        titolo.setVisible(true);
         InfoQuestionarioCollege.setVisible(false);
         InfoQuestionarioFamiglia.setVisible(false);
         TabellaPagamenti.setVisible(false);
@@ -1889,7 +1889,6 @@ public class HomeController {
         TabellaVacanzeView.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
         titoloQuestionari.setVisible(false);
         TabellaQuestionari.setVisible(false);
         TabellaQuestionariCompilati.setVisible(false);
@@ -1899,7 +1898,6 @@ public class HomeController {
         ChoiceTipoVisualizzazione.setVisible(true);
         titolo.setText("VACANZE");
         TestoFiltro.setVisible(true);
-        TestoVacanze.setVisible(true);
     }
 
     private ObservableList<Vacanze> FillTableViewVacanze(ResultSet rs, Object selectedViewType) throws Exception {
@@ -2014,9 +2012,8 @@ public class HomeController {
         PrenotaCollege.setVisible(false);
         TornaCatalogoCollege.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
-        titolo.setText("VACANZE");
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
+        metodoPagamentoCollege.setVisible(false);
         titolo.setText("DETTAGLI VACANZA:");
         TabellaVacanzeView.setVisible(false);
         try {
@@ -2144,7 +2141,7 @@ public class HomeController {
             tabellaGiteCollege.getColumns().addAll(colDestinazioneCollege, colDescrizioneCollege, colOreCollege, colCostoCollege);
             testo_preferenze_college.setVisible(false);
             roomChoice.setVisible(false);
-            ChoicePagamento.setVisible(false);
+            ChoicePagamentoCollege.setVisible(false);
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -2155,9 +2152,8 @@ public class HomeController {
         PrenotaFamiglia.setVisible(false);
         TornaCatalogoFamiglia.setVisible(false);
         ChoiceTipoVisualizzazione.setVisible(false);
-        titolo.setText("VACANZE");
         TestoFiltro.setVisible(false);
-        TestoVacanze.setVisible(false);
+        metodoPagamentoFamiglia.setVisible(false);
         titolo.setText("DETTAGLI VACANZA:");
         TabellaVacanzeView.setVisible(false);
         try {

@@ -31,7 +31,7 @@
                         <TableColumn fx:id="colDataLivello" editable="false" prefWidth="75.0" sortable="false" />
                     </columns>
                 </TableView>
-                <TableView fx:id="TabellaPagamenti" layoutX="246.0" layoutY="248.0" prefHeight="459.0" prefWidth="644.0" style="-fx-background-color: transparent; -fx-control-inner-background: #F8F3F2;" visible="false">
+                <TableView fx:id="TabellaPagamenti" layoutX="246.0" layoutY="248.0" prefHeight="459.0" prefWidth="650.0" style="-fx-background-color: transparent; -fx-control-inner-background: #F8F3F2;" visible="false">
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
@@ -55,7 +55,7 @@
                         <TableColumn fx:id="colCittà" editable="false" prefWidth="75.0" sortable="false" />
                         <TableColumn fx:id="colBottone" editable="false" prefWidth="75.0" sortable="false" />
                     </columns></TableView>
-                <Text fx:id="titolo" fill="#c18446" layoutX="298.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CATALOGO VACANZE" wrappingWidth="444.0">
+                <Text fx:id="titolo" fill="#c18446" layoutX="298.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CATALOGO VACANZE" visible="false" wrappingWidth="444.0">
                     <font>
                         <Font name="Tahoma" size="30.0" />
                     </font>
@@ -69,7 +69,7 @@
                     <font>
                         <Font size="8.0" />
                     </font></Button>
-                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="634.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                <ImageView fx:id="worldmap" fitHeight="318.0" fitWidth="634.0" layoutX="240.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@worldmap.png" />
                     </image>
@@ -380,7 +380,7 @@
                                     </font>
                                 </Label>
                                 <ChoiceBox fx:id="ChoicePagamento" layoutX="334.0" layoutY="987.0" onMouseClicked="#InitializePagamento" prefWidth="150.0" />
-                                <Label layoutX="15.0" layoutY="987.0" text="Metodo di pagamento: ">
+                                <Label fx:id="metodoPagamentoFamiglia" layoutX="15.0" layoutY="987.0" text="Metodo di pagamento: ">
                                     <font>
                                         <Font name="Tahoma" size="20.0" />
                                     </font>
@@ -502,7 +502,7 @@
                                     </font>
                                 </Label>
                                 <ChoiceBox fx:id="ChoicePagamentoCollege" layoutX="288.0" layoutY="1069.0" onMouseClicked="#InitializePagamentoCollege" prefWidth="150.0" />
-                                <Label layoutX="59.0" layoutY="1069.0" text="Metodo di pagamento: ">
+                                <Label fx:id="metodoPagamentoCollege" layoutX="59.0" layoutY="1069.0" text="Metodo di pagamento: ">
                                     <font>
                                         <Font name="Tahoma" size="20.0" />
                                     </font>
@@ -577,31 +577,6 @@
                                         <Font name="Tahoma" size="20.0" />
                                     </font>
                                 </TextField>
-                            </children></AnchorPane>
-                    </content>
-                </ScrollPane>
-                <ScrollPane layoutX="282.0" layoutY="228.0" prefHeight="528.0" prefWidth="595.0" style="-fx-background-color: f8f3f2; -fx-border-color: f8f3f2;" visible="false">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="497.0" prefWidth="591.0" style="-fx-background-color: f8f3f2; -fx-border-color: f8f3f2;">
-                            <children>
-                                <Label layoutX="14.0" layoutY="14.0" text="Vacanze prenotate:" textFill="#c18446">
-                                    <font>
-                                        <Font name="Tahoma" size="25.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="14.0" layoutY="249.0" text="Vacanze effettuate:" textFill="#c18446">
-                                    <font>
-                                        <Font name="Tahoma" size="25.0" />
-                                    </font>
-                                </Label>
-                                <TableView layoutX="30.0" layoutY="52.0" prefHeight="190.0" prefWidth="532.0" style="-fx-background-color: transparent; -fx-control-inner-background: #f8f3f2;">
-                                    <columns>
-                                        <TableColumn fx:id="CittàPrenotate" prefWidth="75.0" />
-                                        <TableColumn fx:id="DataPrenotate" prefWidth="75.0" />
-                                        <TableColumn fx:id="LinguaPrenotate" prefWidth="75.0" />
-                                        <TableColumn fx:id="LinguaPrenotate1" prefWidth="75.0" />
-                                    </columns>
-                                </TableView>
                             </children></AnchorPane>
                     </content>
                 </ScrollPane>
@@ -855,18 +830,13 @@
                         <Font name="Tahoma" size="30.0" />
                     </font>
                 </Text>
-                <Text fx:id="filtra" fill="#393536" fontSmoothingType="LCD" layoutX="761.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FILTRA PER:" textAlignment="CENTER" visible="false" wrappingWidth="77.0">
-                    <font>
-                        <Font name="Tahoma" size="13.0" />
-                    </font>
-                </Text>
                 <ChoiceBox fx:id="ChoiceTipoVisualizzazione" layoutX="582.0" layoutY="248.0" onMouseClicked="#InitializeTipoVacanzaView" prefHeight="25.0" prefWidth="121.0" visible="false" />
-                <Label fx:id="TestoFiltro" layoutX="282.0" layoutY="245.0" prefHeight="32.0" prefWidth="310.0" text="Filtra per tipo di vacanza:" textFill="#c18446" visible="false">
+                <Label fx:id="TestoFiltro" layoutX="299.0" layoutY="245.0" prefHeight="32.0" prefWidth="310.0" text="Filtra per tipo di vacanza:" textFill="#000000" visible="false">
                     <font>
                         <Font name="Tahoma" size="25.0" />
                     </font>
                 </Label>
-                <TableView fx:id="TabellaVacanzeView" layoutX="271.0" layoutY="325.0" prefHeight="409.0" prefWidth="595.0" style="-fx-background-color: transparent; -fx-control-inner-background: #F8F3F2;" visible="false">
+                <TableView fx:id="TabellaVacanzeView" layoutX="294.0" layoutY="326.0" prefHeight="409.0" prefWidth="563.0" style="-fx-background-color: transparent; -fx-control-inner-background: #F8F3F2;" visible="false">
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
@@ -880,11 +850,6 @@
                         <TableColumn fx:id="colBottoneVacanza" editable="false" prefWidth="75.0" sortable="false" />
                     </columns>
                 </TableView>
-                <Label fx:id="TestoVacanze" layoutX="282.0" layoutY="290.0" prefHeight="32.0" prefWidth="243.0" text="Vacanze:" textFill="#c18446" visible="false">
-                    <font>
-                        <Font name="Tahoma" size="25.0" />
-                    </font>
-                </Label>
             </children>
         </AnchorPane>
     </children>
