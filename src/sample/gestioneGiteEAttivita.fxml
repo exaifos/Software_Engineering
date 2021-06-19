@@ -20,7 +20,7 @@
                         <Font name="Tahoma Bold" size="30.0" />
                     </font>
                 </Text>
-                <ImageView fitHeight="27.0" fitWidth="28.0" layoutX="855.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="ImgUscita" fitHeight="27.0" fitWidth="28.0" visible="false" layoutX="855.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@cancel_24px.png" />
                     </image>

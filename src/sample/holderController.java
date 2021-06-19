@@ -99,6 +99,7 @@ public class holderController {
     public Button Fine2;
     public Pane pan;
     public Pane panPrincipale;
+    public ImageView ImgUscita;
 
 
     public void handleExitClick(MouseEvent mouseEvent) {
@@ -116,7 +117,7 @@ public class holderController {
         titolo.setText("Gestione Nuove Vacanze");
     }
 
-    String precedente="";
+    public String precedente="";
     public void visualizeVotes(ActionEvent actionEvent) {
         int x=23;
         int y=14;
@@ -126,7 +127,7 @@ public class holderController {
         scroll.setVisible(true);
         pan.setVisible(false);
         titolo.setText("Gestione Questionari");
-        String query="(SELECT VC.nome_college as soggetto, VC.città as citta, Q.voto, Q.commento FROM questionario_college Q JOIN vacanza_college VC ON Q.codice_vacanza_college=VC.codice) UNION (SELECT 'famiglia ' || VF.cognome_capo_fam as soggetto, VF.città as città, Q.voto, Q.commento FROM questionario_famiglia Q JOIN vacanza_famiglia VF ON Q.codice_vacanza_famiglia=VF.codice)ORDER BY soggetto;\n";
+        String query="(SELECT VC.nome_college as soggetto, VC.città as citta, Q.voto, Q.commento FROM questionario_college Q JOIN vacanza_college VC ON Q.codice_vacanza_college=VC.codice WHERE Q.status=true) UNION (SELECT 'famiglia ' || VF.cognome_capo_fam as soggetto, VF.città as città, Q.voto, Q.commento FROM questionario_famiglia Q JOIN vacanza_famiglia VF ON Q.codice_vacanza_famiglia=VF.codice WHERE Q.status=true)ORDER BY soggetto;\n";
         try {
             ResultSet rs=databaseOperation.SQL_return(query);
             int contatore=0;
@@ -198,7 +199,7 @@ public class holderController {
 
                 scroll.setContent(panPrincipale);
             }
-
+            precedente="";
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -782,22 +783,22 @@ public class holderController {
                                 databaseOperation.SQL_insert(query3);
                             }
                             if (cod_fam[0] != null) {
-                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_col[0] + ", " + codice + ");";
+                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_fam[0] + ", " + codice + ");";
                                 System.out.println(query3);
                                 databaseOperation.SQL_insert(query3);
                             }
                             if (cod_fam[1] != null) {
-                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_col[1] + ", " + codice + ");";
+                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_fam[1] + ", " + codice + ");";
                                 System.out.println(query3);
                                 databaseOperation.SQL_insert(query3);
                             }
                             if (cod_fam[2] != null) {
-                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_col[2] + ", " + codice + ");";
+                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_fam[2] + ", " + codice + ");";
                                 System.out.println(query3);
                                 databaseOperation.SQL_insert(query3);
                             }
                             if (cod_fam[3] != null) {
-                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_col[3] + ", " + codice + ");";
+                                String query3 = "INSERT INTO pianificazione_famiglia(id_vacanza, id_gita) VALUES (" + cod_fam[3] + ", " + codice + ");";
                                 System.out.println(query3);
                                 databaseOperation.SQL_insert(query3);
                             }
@@ -1250,6 +1251,8 @@ public class holderController {
                 System.out.println("COD VALE: " + temp_cod);
                 String q3="INSERT INTO proposta_college(codice_college, nome_attivita, descrizione_attivita) VALUES ('" + temp_cod + "','"+ attivita + "', '" + descrizione + "');";
                 databaseOperation.SQL_insert(q3);
+                ImgUscita.setVisible(true);
+                Exit.setVisible(true);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 Alert alertMissing = new Alert(Alert.AlertType.ERROR);
@@ -1261,3 +1264,4 @@ public class holderController {
         }
     }
 }
+

@@ -405,7 +405,7 @@ public class HomeController {
                 alertMissing.showAndWait();
             } else {
                 try {
-                    String query = "UPDATE ragazzo SET email='" + emailNew + "', telefono='" + telNew + "', nome_allergene='" + allergeniNew + "', precauzioni='" + precauzioniNew + "', password='" + password + "' WHERE CF='" + CF + "';";
+                    String query = "UPDATE ragazzo SET email='" + emailNew + "', telefono='" + telNew + "', nome_allergene='" + allergeniNew + "', precauzioni='" + precauzioniNew +  "', hobby='" + hobbyNew + "', password='" + password + "' WHERE CF='" + CF + "';";
                     databaseOperation.SQL_insert(query);
                     String query2 = "SELECT nome_genitore, cognome_genitore, telefono_genitore FROM tutore WHERE cf='" + CF + "';";
                     ResultSet rs = databaseOperation.SQL_return(query2);
@@ -865,8 +865,6 @@ public class HomeController {
             college.setVisible(false);
             titolo.setText("DETTAGLI VACANZA:");
             ChoiceBoxCatalogo.setVisible(false);
-            // get scrollpane back to the top
-            vacanze_famiglia_info.setVvalue(vacanze_famiglia_info.getVmin());
             nomeAmicoText.clear();
             mailAmicoText.clear();
             String query = "SELECT num_camere, nome_capo_fam, cognome_capo_fam, num_componenti, num_bagni, num_animali, num_ospitabili FROM vacanza_famiglia WHERE codice = " + codiceScelta + ";";
@@ -1892,18 +1890,18 @@ public class HomeController {
     public void InitializeVoto(MouseEvent mouseEvent) {
         System.out.println("TIPO: " + TipoQuestionario);
         //if (TipoQuestionario == ("College")) {
-            VotoQuestionarioCollege.setOnAction((event) -> {
-                System.out.println("Questionario College, sono nell'if");
-                selectedGrade = null;
-                selectedGrade = VotoQuestionarioCollege.getValue();
-            });
+        VotoQuestionarioCollege.setOnAction((event) -> {
+            System.out.println("Questionario College, sono nell'if");
+            selectedGrade = null;
+            selectedGrade = VotoQuestionarioCollege.getValue();
+        });
         //}
         //else if (TipoQuestionario == ("Famiglia")) {
-            VotoQuestionarioFamiglia.setOnAction((event) -> {
-                System.out.println("Questionario Famiglia, sono nell'if");
-                selectedGrade = null;
-                selectedGrade = VotoQuestionarioFamiglia.getValue();
-            });
+        VotoQuestionarioFamiglia.setOnAction((event) -> {
+            System.out.println("Questionario Famiglia, sono nell'if");
+            selectedGrade = null;
+            selectedGrade = VotoQuestionarioFamiglia.getValue();
+        });
         //}
     }
 
@@ -2057,6 +2055,10 @@ public class HomeController {
         metodoPagamentoCollege.setVisible(false);
         titolo.setText("DETTAGLI VACANZA:");
         TabellaVacanzeView.setVisible(false);
+        ChoicePagamento.setVisible(false);
+        // get scrollpane back to the top
+        vacanze_college_info.setVvalue(vacanze_famiglia_info.getVmin());
+        vacanze_college_info.setVisible(true);
         try {
             String query = "SELECT città, lingua, nome_college, indirizzo_college, data_partenza, durata FROM vacanza_college WHERE codice = " + codiceSceltaVacanza + ";";
             ResultSet rs = databaseOperation.SQL_return(query);
@@ -2199,13 +2201,13 @@ public class HomeController {
         metodoPagamentoFamiglia.setVisible(false);
         titolo.setText("DETTAGLI VACANZA:");
         TabellaVacanzeView.setVisible(false);
+        // get scrollpane back to the top
+        vacanze_famiglia_info.setVvalue(vacanze_famiglia_info.getVmin());
+        vacanze_famiglia_info.setVisible(true);
         try {
             String query_vacanza = "SELECT * from vacanza_famiglia WHERE codice = '" + codiceSceltaVacanza + "';";
             ResultSet rs_vacanza = databaseOperation.SQL_return(query_vacanza);
             rs_vacanza.next();
-            // get scrollpane back to the top
-            vacanze_famiglia_info.setVvalue(vacanze_famiglia_info.getVmin());
-            vacanze_famiglia_info.setVisible(true);
             cittàText.setText(capitalize(rs_vacanza.getString("città")));
             if (rs_vacanza.getInt("durata") > 1) {
                 durataText.setText(rs_vacanza.getInt("durata") + " settimane");
@@ -2307,23 +2309,24 @@ public class HomeController {
         ChoiceDestinazione.setVisible(true);
         String query;
         destinazioni.clear();
+        TabellaVacanzeView.setPlaceholder(new Label("Non sono ancora state prenotate vacanze."));
         if (selectedViewType == "Famiglia") {
             query = "SELECT vacanza_famiglia.codice, vacanza_famiglia.durata, vacanza_famiglia.data_partenza, vacanza_famiglia.città, vacanza_famiglia.lingua, vacanza_famiglia.cognome_capo_fam FROM vacanza_famiglia, prenotazione_famiglia WHERE vacanza_famiglia.codice = prenotazione_famiglia.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "';";
         } else {
             query = "SELECT vacanza_college.codice, vacanza_college.durata, vacanza_college.data_partenza, vacanza_college.città, vacanza_college.lingua FROM vacanza_college, prenotazione_college WHERE vacanza_college.codice = prenotazione_college.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "';";
         }
-            try {
-                // query result
-                ResultSet rs = databaseOperation.SQL_return(query);
-                while (rs.next()) {
-                    destinazioni.add(rs.getString("città"));
-                }
-                ChoiceDestinazione.setVisible(true);
-                TestoFiltro2.setVisible(true);
-                ChoiceDestinazione.setItems(destinazioni);
-            } catch (Exception ex) {
-                System.out.println(ex);
+        try {
+            // query result
+            ResultSet rs = databaseOperation.SQL_return(query);
+            while (rs.next()) {
+                destinazioni.add(rs.getString("città"));
             }
+            ChoiceDestinazione.setVisible(true);
+            TestoFiltro2.setVisible(true);
+            ChoiceDestinazione.setItems(destinazioni);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         if (selectedViewType == "Famiglia") {
             query = "SELECT vacanza_famiglia.codice, vacanza_famiglia.durata, vacanza_famiglia.data_partenza, vacanza_famiglia.città, vacanza_famiglia.lingua, vacanza_famiglia.cognome_capo_fam FROM vacanza_famiglia, prenotazione_famiglia WHERE vacanza_famiglia.codice = prenotazione_famiglia.codice_vacanza AND \"CF_ragazzo\" = '" + CF + "'" + destinazione + ";";
         } else {
@@ -2360,15 +2363,15 @@ public class HomeController {
     }
 
     public void InitializeDestinazione(MouseEvent mouseEvent) throws SQLException {
-            ChoiceDestinazione.setOnAction((event) -> {
-                selectedDestinazione = ChoiceDestinazione.getValue();
-                if (selectedDestinazione != null) {
-                    try {
-                        showVacations2("AND città = '" + selectedDestinazione + "'");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+        ChoiceDestinazione.setOnAction((event) -> {
+            selectedDestinazione = ChoiceDestinazione.getValue();
+            if (selectedDestinazione != null) {
+                try {
+                    showVacations2("AND città = '" + selectedDestinazione + "'");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
+            }
+        });
     }
 }
